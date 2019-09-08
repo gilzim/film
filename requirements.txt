@@ -2,6 +2,6 @@ http://download.pytorch.org/whl/cu80/torch-0.1.11.post5-cp35-cp35m-linux_x86_64.
 numpy
 Pillow
 scipy
-torchvision
+torchvision==0.1.7
 h5py
 tqdm
