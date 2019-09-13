@@ -101,6 +101,8 @@ parser.add_argument('--module_input_proj', default=1, type=int)  # Inp conv kern
 parser.add_argument('--module_kernel_size', default=3, type=int)
 parser.add_argument('--condition_method', default='bn-film', type=str,
                     choices=['block-input-film', 'block-output-film', 'bn-film', 'concat', 'conv-film', 'relu-film'])
+parser.add_argument('--cbn_method', default='cbn-no-bn', type=str,
+                    choices=['cbn-no-bn', 'film-cbn', 'relu-cbn'])
 parser.add_argument('--condition_pattern', default='', type=str)  # List of 0/1's (len = # FiLMs)
 parser.add_argument('--use_gamma', default=1, type=int)
 parser.add_argument('--use_beta', default=1, type=int)
@@ -464,6 +466,7 @@ def get_execution_engine(args):
             kwargs['debug_every'] = args.debug_every
             kwargs['print_verbose_every'] = args.print_verbose_every
             kwargs['condition_method'] = args.condition_method
+            kwargs['cbn_method'] = args.cbn_method
             kwargs['condition_pattern'] = parse_int_list(args.condition_pattern)
             ee = FiLMedNet(**kwargs)
         else:
