@@ -16,10 +16,10 @@ import vr.programs
 
 
 def _dataset_to_tensor(dset, mask=None):
-  arr = np.asarray(dset, dtype=np.int64)
+  arr = np.asarray(dset, dtype=np.int32)
   if mask is not None:
     arr = arr[mask]
-  tensor = torch.LongTensor(arr)
+  tensor = torch.LongTensor(arr.tolist())
   return tensor
 
 
