@@ -4,16 +4,15 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - python=3.7
+  - python=3.5
   - pytorch=1.0.1
   - torchvision==0.2.1
   - cudatoolkit==9.0
-  - jupyterlab=0.35
   - numpy=1.15
-  - jupyter
-  - scipy
+  - scipy==1.0.0
   - pillow
   - h5py
-  - pip:
-    - nbmerge
-    - pytest-xdist
+  - scikit-learn=0.19
+  - tqdm
+  - termcolor
+  - ipdb
