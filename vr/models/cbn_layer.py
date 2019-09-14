@@ -17,7 +17,7 @@ class CBN(nn.Module):
         gammas = gammas.unsqueeze(2).unsqueeze(3).expand_as(x)
         betas = betas.unsqueeze(2).unsqueeze(3).expand_as(x)
 
-        n, c, h, w = x.shape
+        n, c, h, w = x.size()
         x_flat = x.reshape(n, c * h * w)
 
         mu = np.mean(x_flat, axis=0)
