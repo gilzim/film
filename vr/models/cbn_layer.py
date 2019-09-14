@@ -1,5 +1,7 @@
 import numpy as np
 import torch.nn as nn
+from torch.autograd import Variable
+
 
 class CBN(nn.Module):
     """
@@ -11,13 +13,9 @@ class CBN(nn.Module):
         super(CBN, self).__init__()
         self.epsilon = epsilon
 
-    def forward(self, x, gammas, betas):
+    def forward(self, x: Variable, gammas, betas):
         gammas = gammas.unsqueeze(2).unsqueeze(3).expand_as(x)
         betas = betas.unsqueeze(2).unsqueeze(3).expand_as(x)
-
-        print(type(x))
-        print(type(gammas))
-        print(type(betas))
 
         n, c, h, w = x.shape
         x_flat = x.reshape(n, c * h * w)
@@ -27,4 +25,3 @@ class CBN(nn.Module):
         x_norm = (x_flat - mu) / np.sqrt(var + self.epsilon)
 
         return (gammas * x_norm) + betas
-
