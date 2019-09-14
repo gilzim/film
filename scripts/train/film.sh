@@ -7,7 +7,7 @@ python scripts/train_model.py \
   --model_type FiLM \
   --num_iterations 20000000 \
   --print_verbose_every 20000000 \
-  --checkpoint_every 11000 \
+  --checkpoint_every 200000 \
   --record_loss_every 100 \
   --num_val_samples 149991 \
   --optimizer Adam \
