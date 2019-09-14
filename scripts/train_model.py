@@ -426,7 +426,6 @@ def get_program_generator(args):
             pg = FiLMGen(**kwargs)
         else:
             pg = Seq2Seq(**kwargs)
-    pg = nn.DataParallel(pg)
     pg.cuda()
     pg.train()
     return pg, kwargs
@@ -472,7 +471,6 @@ def get_execution_engine(args):
             ee = FiLMedNet(**kwargs)
         else:
             ee = ModuleNet(**kwargs)
-    ee = nn.DataParallel(ee)
     ee.cuda()
     ee.train()
     return ee, kwargs
@@ -535,7 +533,6 @@ def get_baseline_model(args):
             model.rnn.token_to_idx[token] = idx
         kwargs['vocab'] = vocab
         model.rnn.expand_vocab(vocab['question_token_to_idx'])
-    model = nn.DataParallel(model)
     model.cuda()
     model.train()
     return model, kwargs

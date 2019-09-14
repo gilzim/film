@@ -122,6 +122,7 @@ class FiLMedNet(nn.Module):
                        num_layers=self.module_num_layers,
                        condition_method=condition_method,
                        debug_every=self.debug_every)
+      mod = nn.DataParallel(mod)
       self.add_module(str(fn_num), mod)
       self.function_modules[fn_num] = mod
 
