@@ -18,6 +18,8 @@ class CBN(nn.Module):
         betas = betas.unsqueeze(2).unsqueeze(3).expand_as(x)
 
         print(x.size())
+        print(gammas.size())
+        print(betas.size())
         n, c, h, w = x.size()
         x_flat = x.reshape(n, c * h * w)
 
