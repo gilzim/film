@@ -287,7 +287,7 @@ def train_loop(args, train_loader, val_loader):
                 if args.set_execution_engine_eval == 1:
                     set_mode('eval', [execution_engine])
                 programs_pred = program_generator(questions_var)
-                scores = execution_engine(feats_var, programs_pred.to(execution_engine.device()))
+                scores = execution_engine(feats_var, programs_pred)
                 loss = loss_fn(scores, answers_var)
 
                 pg_optimizer.zero_grad()
@@ -426,7 +426,7 @@ def get_program_generator(args):
             pg = FiLMGen(**kwargs)
         else:
             pg = Seq2Seq(**kwargs)
-    pg = nn.DataParallel(pg)
+    pg = nn.DistributedDataParallel(pg)
     pg.cuda()
     pg.train()
     return pg, kwargs
@@ -470,10 +470,9 @@ def get_execution_engine(args):
             kwargs['condition_method'] = args.condition_method
             kwargs['condition_pattern'] = parse_int_list(args.condition_pattern)
             ee = FiLMedNet(**kwargs)
-            ee = nn.DataParallel(ee)
         else:
             ee = ModuleNet(**kwargs)
-            ee = nn.DataParallel(ee)
+    ee = nn.DistributedDataParallel(ee)
     ee.cuda()
     ee.train()
     return ee, kwargs
