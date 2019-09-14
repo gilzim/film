@@ -20,8 +20,8 @@ class CBN(nn.Module):
         n, c, h, w = x.size()
         x_flat = x.view(n, c * h * w)
 
-        mu = x_flat.mean(axis=0)
-        var = x_flat.var(axis=0)
+        mu = np.mean(x_flat.data, axis=0)
+        var = np.var(x_flat.data, axis=0)
         x_norm = (x_flat - mu) / np.sqrt(var + self.epsilon)
 
         print(x_norm.size())
