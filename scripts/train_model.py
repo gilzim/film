@@ -21,6 +21,8 @@ import time
 
 import torch
 
+import torch.nn as nn
+
 torch.backends.cudnn.enabled = True
 from torch.autograd import Variable
 import torch.nn.functional as F
@@ -33,6 +35,7 @@ from vr.data import ClevrDataset, ClevrDataLoader
 from vr.models import ModuleNet, Seq2Seq, LstmModel, CnnLstmModel, CnnLstmSaModel
 from vr.models import FiLMedNet
 from vr.models import FiLMGen
+
 
 parser = argparse.ArgumentParser()
 
@@ -466,8 +469,10 @@ def get_execution_engine(args):
             kwargs['condition_method'] = args.condition_method
             kwargs['condition_pattern'] = parse_int_list(args.condition_pattern)
             ee = FiLMedNet(**kwargs)
+            ee = nn.DataParallel(ee)
         else:
             ee = ModuleNet(**kwargs)
+            ee = nn.DataParallel(ee)
     ee.cuda()
     ee.train()
     return ee, kwargs
