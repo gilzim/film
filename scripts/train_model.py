@@ -287,7 +287,7 @@ def train_loop(args, train_loader, val_loader):
                 if args.set_execution_engine_eval == 1:
                     set_mode('eval', [execution_engine])
                 programs_pred = program_generator(questions_var)
-                scores = execution_engine(feats_var, programs_pred)
+                scores = execution_engine(feats_var, programs_pred.to(execution_engine.device()))
                 loss = loss_fn(scores, answers_var)
 
                 pg_optimizer.zero_grad()
