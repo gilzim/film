@@ -21,7 +21,7 @@ import time
 
 import torch
 
-from torch.nn.parallel import DistributedDataParallel as DDP
+import torch.nn as nn
 
 torch.backends.cudnn.enabled = True
 from torch.autograd import Variable
@@ -426,8 +426,8 @@ def get_program_generator(args):
             pg = FiLMGen(**kwargs)
         else:
             pg = Seq2Seq(**kwargs)
-    pg = DDP(pg)
-    pg.cuda()
+    pg = nn.DataParallel(pg)
+    # pg.cuda()
     pg.train()
     return pg, kwargs
 
@@ -472,8 +472,8 @@ def get_execution_engine(args):
             ee = FiLMedNet(**kwargs)
         else:
             ee = ModuleNet(**kwargs)
-    ee = DDP(ee)
-    ee.cuda()
+    ee = nn.DataParallel(ee)
+    # ee.cuda()
     ee.train()
     return ee, kwargs
 
