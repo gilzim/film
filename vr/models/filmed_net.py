@@ -103,6 +103,7 @@ class FiLMedNet(nn.Module):
     self.stem = build_stem(stem_feature_dim, module_dim,
                            num_layers=stem_num_layers, with_batchnorm=stem_batchnorm,
                            kernel_size=stem_kernel_size, stride=stem_stride, padding=stem_padding)
+    self.stem = nn.DataParallel(self.stem)
 
     # Initialize FiLMed network body
     self.function_modules = {}
@@ -131,6 +132,7 @@ class FiLMedNet(nn.Module):
                                        num_answers, classifier_fc_layers, classifier_proj_dim,
                                        classifier_downsample, with_batchnorm=classifier_batchnorm,
                                        dropout=classifier_dropout)
+    self.classifier = nn.DataParallel(self.classifier)
 
     init_modules(self.modules())
 

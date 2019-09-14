@@ -43,6 +43,7 @@ python scripts/train_model.py \
   --gamma_baseline 1 \
   --use_gamma 1 \
   --use_beta 1 \
+  --time 1 \
   --condition_method bn-film \
   --program_generator_parameter_efficient 1 \
   | tee $log_path
