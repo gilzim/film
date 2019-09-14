@@ -426,6 +426,7 @@ def get_program_generator(args):
             pg = FiLMGen(**kwargs)
         else:
             pg = Seq2Seq(**kwargs)
+    pg = nn.DataParallel(pg)
     pg.cuda()
     pg.train()
     return pg, kwargs
