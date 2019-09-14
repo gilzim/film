@@ -44,5 +44,6 @@ python scripts/train_model.py \
   --use_gamma 1 \
   --use_beta 1 \
   --condition_method bn-film \
+  --cbn_method relu-cbn \
   --program_generator_parameter_efficient 1 \
   | tee $log_path
