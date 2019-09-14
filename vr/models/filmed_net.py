@@ -50,6 +50,7 @@ class FiLMedNet(nn.Module):
                  classifier_batchnorm=False,
                  classifier_dropout=0,
                  condition_method='bn-film',
+                 cbn_method='no-cbn',
                  condition_pattern=[],
                  use_gamma=True,
                  use_beta=True,
@@ -72,6 +73,7 @@ class FiLMedNet(nn.Module):
         self.module_batchnorm = module_batchnorm
         self.module_dim = module_dim
         self.condition_method = condition_method
+        self.cbn_method = cbn_method
         self.use_gamma = use_gamma
         self.use_beta = use_beta
         self.use_coords_freq = use_coords
@@ -123,6 +125,7 @@ class FiLMedNet(nn.Module):
                              batchnorm_affine=module_batchnorm_affine,
                              num_layers=self.module_num_layers,
                              condition_method=condition_method,
+                             cbn_method=cbn_method,
                              debug_every=self.debug_every)
             self.add_module(str(fn_num), mod)
             self.function_modules[fn_num] = mod
