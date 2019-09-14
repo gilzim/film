@@ -3,7 +3,8 @@ import torch.nn as nn
 
 class CBN(nn.Module):
     """
-  cbn
+  A conditional batch normalization layer from
+  'Learning Visual Reasoning Without Strong Priors'
   """
 
     def __init__(self, epsilon=1e-5):
@@ -21,4 +22,5 @@ class CBN(nn.Module):
         var = np.var(x_flat, axis=0)
         x_norm = (x_flat - mu) / np.sqrt(var + self.epsilon)
 
-        out = gammas * x_norm + betas
+        return (gammas * x_norm) + betas
+
