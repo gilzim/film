@@ -19,14 +19,10 @@ class CBN(nn.Module):
         betas = betas.unsqueeze(2).unsqueeze(3).expand_as(x)
 
         n, c, h, w = x.size()
-        x_flat_cuda = x.view(n, c * h * w)
-        x_flat_cpu = x_flat_cuda.data.cpu().numpy()
+        x_flat = x.view(n, c * h * w)
 
-        mu = np.mean(x_flat_cpu, axis=0)
-        var = np.var(x_flat_cpu, axis=0)
-        x_norm = (x_flat_cpu - mu) / np.sqrt(var + self.epsilon)
-        x_norm = torch.from_numpy(x_norm)
-        x_norm = x_norm.cuda()
-        x_flat_cuda.data = x_norm
+        mu = x_flat.mean(1)
+        var = x_flat.std(1)
+        x_norm = (x_flat - mu) / np.sqrt(var + self.epsilon)
 
-        return (gammas * x_flat_cuda) + betas
+        return (gammas * x_norm) + betas
