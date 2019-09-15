@@ -14,6 +14,8 @@ class CBN(nn.Module):
         super(CBN, self).__init__()
         self.epsilon = epsilon
 
+    # x.size() == (64,128,14,14)
+    #gammas.size() == betas.size() == (64,128)
     def forward(self, x: Variable, gammas, betas):
         print(x.size(), gammas.size(), betas.size())
 

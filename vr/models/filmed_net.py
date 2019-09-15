@@ -150,8 +150,10 @@ class FiLMedNet(nn.Module):
             pdb.set_trace()
 
         # Prepare FiLM layers
-        gammas = None
-        betas = None
+        film_gammas = None
+        film_betas = None
+        cbn_gammas = None
+        cbn_betas = None
         if self.condition_method == 'concat':
             # Use parameters usually used to condition via FiLM instead to condition via concatenation
             cond_params = film[:, :, :2 * self.module_dim]
@@ -159,11 +161,13 @@ class FiLMedNet(nn.Module):
         else:
             # film.size() = (64,4,256)
             # gammas.size() == betas.size() == (64,4,128)
-            gammas, betas = torch.split(film[:, :, :2 * self.module_dim], self.module_dim, dim=-1)
+            film_gammas, film_betas, cbn_gammas, cbn_betas = torch.split(film[:, :, :4 * self.module_dim], self.module_dim, dim=-1)
             if not self.use_gamma:
-                gammas = self.default_weight.expand_as(gammas)
+                film_gammas = self.default_weight.expand_as(film_gammas)
+                cbn_gammas = self.default_weight.expand_as(cbn_gammas)
             if not self.use_beta:
-                betas = self.default_bias.expand_as(betas)
+                film_betas = self.default_bias.expand_as(film_betas)
+                cbn_betas = self.default_bias.expand_as(cbn_betas)
 
         # Propagate up image features CNN
         batch_coords = None
@@ -187,7 +191,8 @@ class FiLMedNet(nn.Module):
                                                              cond_maps=cond_maps[:, fn_num])
             else:
                 layer_output = self.function_modules[fn_num](module_inputs[:, fn_num],
-                                                             gammas[:, fn_num, :], betas[:, fn_num, :], batch_coords)
+                                                             film_gammas[:, fn_num, :], film_betas[:, fn_num, :],
+                                                             cbn_gammas[:, fn_num, :], cbn_betas[:, fn_num, :], batch_coords)
 
             # Store for future computation
             if save_activations:
@@ -268,12 +273,12 @@ class FiLMedResBlock(nn.Module):
 
         init_modules(self.modules())
 
-    def forward(self, x, gammas=None, betas=None, extra_channels=None, cond_maps=None):
+    def forward(self, x, film_gammas=None, film_betas=None, cbn_gammas=None, cbn_betas=None, extra_channels=None, cond_maps=None):
         if self.debug_every <= -2:
             pdb.set_trace()
 
         if self.condition_method == 'block-input-film' and self.with_cond[0]:
-            x = self.film(x, gammas, betas)
+            x = self.film(x, film_gammas, film_betas)
 
         # ResBlock input projection
         if self.with_input_proj:
@@ -289,29 +294,29 @@ class FiLMedResBlock(nn.Module):
             out = torch.cat([out, extra_channels], 1)
         out = self.conv1(out)
         if self.condition_method == 'conv-film' and self.with_cond[0]:
-            out = self.film(out, gammas, betas)
+            out = self.film(out, film_gammas, film_betas)
         if self.with_batchnorm:
             if self.cbn_method == 'cbn-no-bn':
-                out = self.cbn(out, gammas, betas)
+                out = self.cbn(out, cbn_gammas, cbn_betas)
             else:
                 out = self.bn1(out)
         if self.condition_method == 'bn-film' and self.with_cond[0]:
-            out = self.film(out, gammas, betas)
+            out = self.film(out, film_gammas, film_betas)
         if self.cbn_method == 'film-cbn':
-            out = self.cbn(out, gammas, betas)
+            out = self.cbn(out, cbn_gammas, cbn_betas)
         if self.dropout > 0:
             out = self.drop(out)
         out = F.relu(out)
         if self.condition_method == 'relu-film' and self.with_cond[0]:
-            out = self.film(out, gammas, betas)
+            out = self.film(out, film_gammas, film_betas)
         if self.cbn_method == 'relu-cbn':
-            out = self.cbn(out, gammas, betas)
+            out = self.cbn(out, cbn_gammas, cbn_betas)
 
         # ResBlock remainder
         if self.with_residual:
             out = x + out
         if self.condition_method == 'block-output-film' and self.with_cond[0]:
-            out = self.film(out, gammas, betas)
+            out = self.film(out, film_gammas, film_betas)
         return out
 
 
