@@ -158,6 +158,7 @@ class FiLMedNet(nn.Module):
             cond_maps = cond_params.unsqueeze(3).unsqueeze(4).expand(cond_params.size() + x.size()[-2:])
         else:
             gammas, betas = torch.split(film[:, :, :2 * self.module_dim], self.module_dim, dim=-1)
+            print(film.size(), gammas.size(), betas.size())
             if not self.use_gamma:
                 gammas = self.default_weight.expand_as(gammas)
             if not self.use_beta:
