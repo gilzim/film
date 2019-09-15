@@ -18,12 +18,14 @@ class CBN(nn.Module):
         betas = betas.unsqueeze(2).unsqueeze(3).expand_as(x)
 
         n, c, h, w = x.size()
-        x_flat = x.view(n, c * h * w)
+        x_flat_cuda = x.view(n, c * h * w)
+        x_flat_cpu = x_flat_cuda.data.cpu()
 
-        print(type(x_flat.data), x_flat.data)
-        mu = np.mean(x_flat.data, axis=0)
-        var = np.var(x_flat.data, axis=0)
-        x_norm = (x_flat - mu) / np.sqrt(var + self.epsilon)
+        print(type(x_flat_cuda.data), x_flat_cuda.data)
+        print(type(x_flat_cpu), x_flat_cpu)
+        mu = np.mean(x_flat_cpu, axis=0)
+        var = np.var(x_flat_cpu, axis=0)
+        x_norm = (x_flat_cuda - mu) / np.sqrt(var + self.epsilon)
 
         print(x_norm.size())
         print(gammas.size())
