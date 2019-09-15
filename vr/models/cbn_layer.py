@@ -27,7 +27,7 @@ class CBN(nn.Module):
         mu = np.mean(x_flat_cpu, axis=0)
         var = np.var(x_flat_cpu, axis=0)
         x_norm = (x_flat_cpu - mu) / np.sqrt(var + self.epsilon)
-        x_norm = torch.tensor(x_norm)
+        x_norm = torch.from_numpy(x_norm)
         x_norm = x_norm.cuda()
         x_flat_cuda.data = x_norm
 
