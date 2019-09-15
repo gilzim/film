@@ -23,6 +23,8 @@ class CBN(nn.Module):
 
         mu = x_flat.mean(0)
         var = x_flat.std(0)
+
+        print(x_flat.size(), mu.size(), var.size())
         x_norm = (x_flat - mu) / np.sqrt(var + self.epsilon)
 
         return (gammas * x_norm) + betas
