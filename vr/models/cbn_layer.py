@@ -25,6 +25,6 @@ class CBN(nn.Module):
         var = x_flat.std(1).expand_as(x_flat)
 
         print(x_flat.size(), mu.size(), var.size())
-        x_norm = (x_flat - mu) / np.sqrt(var + self.epsilon)
+        x_norm = (x_flat - mu) / (var + self.epsilon).sqrt()
 
         return (gammas * x_norm.view(n,c,h,w)) + betas
