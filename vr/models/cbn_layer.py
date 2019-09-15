@@ -17,8 +17,6 @@ class CBN(nn.Module):
     # x.size() == (64,128,14,14)
     #gammas.size() == betas.size() == (64,128)
     def forward(self, x: Variable, gammas, betas):
-        print(x.size(), gammas.size(), betas.size())
-
         gammas = gammas.unsqueeze(2).unsqueeze(3).expand_as(x)
         betas = betas.unsqueeze(2).unsqueeze(3).expand_as(x)
 
