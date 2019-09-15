@@ -19,7 +19,7 @@ class CBN(nn.Module):
 
         n, c, h, w = x.size()
         x_flat_cuda = x.view(n, c * h * w)
-        x_flat_cpu = x_flat_cuda.data.cpu()
+        x_flat_cpu = x_flat_cuda.data.cpu().numpy()
 
         print(type(x_flat_cuda.data), x_flat_cuda.data)
         print(type(x_flat_cpu), x_flat_cpu)
