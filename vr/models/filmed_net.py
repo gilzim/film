@@ -161,7 +161,7 @@ class FiLMedNet(nn.Module):
         else:
             # film.size() = (64,4,256)
             # gammas.size() == betas.size() == (64,4,128)
-            film_gammas, film_betas, cbn_gammas, cbn_betas = torch.split(film[:, :, :4 * self.module_dim], self.module_dim, dim=-1)
+            film_gammas, cbn_gammas, film_betas, cbn_betas = torch.split(film[:, :, :4 * self.module_dim], self.module_dim, dim=-1)
             if not self.use_gamma:
                 film_gammas = self.default_weight.expand_as(film_gammas)
                 cbn_gammas = self.default_weight.expand_as(cbn_gammas)
