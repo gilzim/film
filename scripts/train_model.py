@@ -424,7 +424,6 @@ def get_program_generator(args):
             kwargs['module_dim'] = args.module_dim * 2
             kwargs['debug_every'] = args.debug_every
             pg = FiLMGen(**kwargs)
-            pg = nn.DataParallel(pg)
         else:
             pg = Seq2Seq(**kwargs)
     pg.cuda()
