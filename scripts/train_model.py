@@ -33,6 +33,7 @@ from vr.data import ClevrDataset, ClevrDataLoader
 from vr.models import ModuleNet, Seq2Seq, LstmModel, CnnLstmModel, CnnLstmSaModel
 from vr.models import FiLMedNet
 from vr.models import FiLMGen
+import torch.nn as nn
 
 parser = argparse.ArgumentParser()
 
@@ -422,7 +423,8 @@ def get_program_generator(args):
             kwargs['module_num_layers'] = args.module_num_layers
             kwargs['module_dim'] = args.module_dim * 2
             kwargs['debug_every'] = args.debug_every
-            pg = FiLMGen(**kwargs)
+            pg = nn.FiLMGen(**kwargs)
+            pg = nn.DataParallel(pg)
         else:
             pg = Seq2Seq(**kwargs)
     pg.cuda()
