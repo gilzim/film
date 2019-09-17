@@ -34,6 +34,7 @@ from vr.models import ModuleNet, Seq2Seq, LstmModel, CnnLstmModel, CnnLstmSaMode
 from vr.models import FiLMedNet
 from vr.models import FiLMGen
 import torch.nn as nn
+import torch.cuda as cuda
 
 parser = argparse.ArgumentParser()
 
@@ -426,7 +427,8 @@ def get_program_generator(args):
             pg = FiLMGen(**kwargs)
         else:
             pg = Seq2Seq(**kwargs)
-    pg = nn.DataParallel(pg)
+    if cuda.device_count() > 1:
+        pg = nn.DataParallel(pg)
     pg.cuda()
     pg.train()
     return pg, kwargs
