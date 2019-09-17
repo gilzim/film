@@ -427,6 +427,7 @@ def get_program_generator(args):
             pg = FiLMGen(**kwargs)
         else:
             pg = Seq2Seq(**kwargs)
+    print("device count = %d" % cuda.device_count())
     if cuda.device_count() > 1:
         pg = nn.DataParallel(pg)
     pg.cuda()
