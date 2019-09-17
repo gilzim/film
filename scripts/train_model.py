@@ -289,8 +289,8 @@ def train_loop(args, train_loader, val_loader):
                     set_mode('eval', [execution_engine])
                 programs_pred = program_generator(questions_var)
                 print(type(feats_var), type(programs_pred))
-                print(feats_var)
-                print(programs_pred)
+                print(feats_var.size())
+                print(programs_pred.size())
                 scores = execution_engine(feats_var, programs_pred)
                 loss = loss_fn(scores, answers_var)
 
