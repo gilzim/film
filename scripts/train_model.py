@@ -207,7 +207,6 @@ def main(args):
 
 
 def train_loop(args, train_loader, val_loader):
-    torch.cuda.set_device(0)
     vocab = utils.load_vocab(args.vocab_json)
     program_generator, pg_kwargs, pg_optimizer = None, None, None
     execution_engine, ee_kwargs, ee_optimizer = None, None, None
