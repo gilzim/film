@@ -298,7 +298,7 @@ def train_loop(args, train_loader, val_loader):
                 flat_feats_var = feats_var.view(n, c*h*w)
                 n, h, w = programs_pred.size()
                 flat_program_pred = programs_pred.view(n, h*w)
-                flat_film_input = torch.cat((flat_feats_var, flat_program_pred), dim=1)
+                flat_film_input = torch.cat((flat_feats_var, flat_program_pred), 1)
                 scores = execution_engine(flat_film_input, feats_var.size(), programs_pred.size())
 
                 loss = loss_fn(scores, answers_var)
