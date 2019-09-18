@@ -294,8 +294,7 @@ def train_loop(args, train_loader, val_loader):
                 # zipped = tuple(zip(feats_var, programs_pred))
                 # print("zipped_train", zipped.__len__())
 
-                xfilm = (feats_var, programs_pred)
-                scores = execution_engine(xfilm)
+                scores = execution_engine(feats_var, programs_pred)
 
                 loss = loss_fn(scores, answers_var)
 
