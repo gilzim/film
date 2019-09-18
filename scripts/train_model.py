@@ -477,8 +477,8 @@ def get_execution_engine(args):
             ee = FiLMedNet(**kwargs)
         else:
             ee = ModuleNet(**kwargs)
-    if cuda.device_count() > 1:
-        ee = nn.DataParallel(ee)
+    # if cuda.device_count() > 1:
+    #     ee = nn.DataParallel(ee)
     ee.cuda()
     ee.train()
     return ee, kwargs
