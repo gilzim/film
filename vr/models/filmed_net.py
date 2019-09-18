@@ -145,7 +145,9 @@ class FiLMedNet(nn.Module):
         x_len = x_c*x_h*x_w
         film_len = f_h*f_w
 
-        x, film = torch.split(xfilm, [x_len, film_len], dim=1)
+        x = xfilm[:, :x_len]
+        film = xfilm[:, x_len:]
+        # x, film = torch.split(xfilm, [x_len, film_len], dim=1)
         x = x.view((n, x_c, x_h, x_w))
         film = film.view((n, f_h, f_w))
         print(x.size(), film.size())
