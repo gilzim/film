@@ -294,7 +294,12 @@ def train_loop(args, train_loader, val_loader):
                 # zipped = tuple(zip(feats_var, programs_pred))
                 # print("zipped_train", zipped.__len__())
 
-                scores = execution_engine(feats_var, programs_pred)
+                n, c, h, w = feats_var.size()
+                flat_feats_var = feats_var.view(n, c*h*w)
+                n, h, w = programs_pred.size()
+                flat_program_pred = programs_pred.view(n, h*w)
+                flat_film_input = torch.cat((flat_feats_var, flat_program_pred), dim=1)
+                scores = execution_engine(flat_film_input, feats_var.size(), programs_pred.size())
 
                 loss = loss_fn(scores, answers_var)
 
@@ -485,7 +490,6 @@ def get_execution_engine(args):
             ee = ModuleNet(**kwargs)
     if cuda.device_count() > 1:
         ee = nn.DataParallel(ee)
-        torch.cuda.set_device(0)
     ee.cuda()
     ee.train()
     return ee, kwargs

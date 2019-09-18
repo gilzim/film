@@ -138,8 +138,18 @@ class FiLMedNet(nn.Module):
 
         init_modules(self.modules())
 
-    def forward(self, x, film, save_activations=False):
+    def forward(self, xfilm, x_size, film_size, save_activations=False):
+        n = xfilm.size()[0]
+        _, x_c, x_h, x_w = x_size
+        _, f_h, f_w = film_size
+        x_len = x_c*x_h*x_w
+        film_len = f_h*f_w
+
+        x, film = torch.split(xfilm, (x_len, film_len), dim=1)
+        x = x.view((n, x_c, x_h, x_w))
+        film = film.view((n, f_h, f_w))
         print(x.size(), film.size())
+
         # Initialize forward pass and externally viewable activations
         self.fwd_count += 1
         if save_activations:
