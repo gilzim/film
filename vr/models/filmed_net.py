@@ -139,6 +139,7 @@ class FiLMedNet(nn.Module):
         init_modules(self.modules())
 
     def forward(self, x, film, save_activations=False):
+        print(x.size(), film.size())
         # Initialize forward pass and externally viewable activations
         self.fwd_count += 1
         if save_activations:
