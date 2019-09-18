@@ -147,6 +147,8 @@ class FiLMedNet(nn.Module):
 
         x = xfilm[:, :x_len]
         film = xfilm[:, x_len:]
+        x = x.contiguous()
+        film = film.contiguous()
         # x, film = torch.split(xfilm, [x_len, film_len], dim=1)
         print("==x==")
         print(x)
