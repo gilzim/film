@@ -289,7 +289,7 @@ def train_loop(args, train_loader, val_loader):
                     set_mode('eval', [execution_engine])
                 programs_pred = program_generator(questions_var)
 
-                zipped = tuple((zip(feats_var, programs_pred)))
+                zipped = tuple(zip(feats_var, programs_pred))
                 scores = execution_engine(zipped)
 
                 loss = loss_fn(scores, answers_var)
