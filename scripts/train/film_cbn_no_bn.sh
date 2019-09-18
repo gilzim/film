@@ -9,7 +9,8 @@ python scripts/train_model.py \
   --print_verbose_every 20000000 \
   --checkpoint_every 100000 \
   --record_loss_every 100 \
-  --num_val_samples 149991 \
+  --num_train_samples 350000 \
+  --num_val_samples 75000 \
   --optimizer Adam \
   --learning_rate 3e-4 \
   --batch_size 64 \
