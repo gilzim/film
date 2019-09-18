@@ -207,6 +207,7 @@ def main(args):
 
 
 def train_loop(args, train_loader, val_loader):
+    torch.cuda.set_device(0)
     vocab = utils.load_vocab(args.vocab_json)
     program_generator, pg_kwargs, pg_optimizer = None, None, None
     execution_engine, ee_kwargs, ee_optimizer = None, None, None
@@ -287,20 +288,9 @@ def train_loop(args, train_loader, val_loader):
             if args.model_type == 'FiLM':
                 if args.set_execution_engine_eval == 1:
                     set_mode('eval', [execution_engine])
+
                 programs_pred = program_generator(questions_var)
-
-                print("x", type(feats_var), feats_var.size())
-                print("film", type(programs_pred), programs_pred.size())
-                # zipped = tuple(zip(feats_var, programs_pred))
-                # print("zipped_train", zipped.__len__())
-
-                n, c, h, w = feats_var.size()
-                flat_feats_var = feats_var.view(n, c*h*w)
-                n, h, w = programs_pred.size()
-                flat_program_pred = programs_pred.view(n, h*w)
-                flat_film_input = torch.cat((flat_feats_var, flat_program_pred), 1)
-                scores = execution_engine(flat_film_input, feats_var.size(), programs_pred.size())
-
+                scores = execution_engine(feats_var, programs_pred)
                 loss = loss_fn(scores, answers_var)
 
                 pg_optimizer.zero_grad()
