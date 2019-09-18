@@ -485,7 +485,7 @@ def get_execution_engine(args):
             ee = ModuleNet(**kwargs)
     if cuda.device_count() > 1:
         ee = nn.DataParallel(ee)
-        ee.to(torch.device('cuda:0'))
+        torch.cuda.set_device(0)
     else:
         ee.cuda(device=0)
     ee.train()
