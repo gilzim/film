@@ -291,6 +291,7 @@ def train_loop(args, train_loader, val_loader):
 
                 print("x", feats_var.size())
                 print("film", programs_pred.size())
+                print(zipped.__len__())
                 zipped = tuple(zip(feats_var, programs_pred))
                 scores = execution_engine(zipped)
 
