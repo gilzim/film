@@ -288,8 +288,10 @@ def train_loop(args, train_loader, val_loader):
                 if args.set_execution_engine_eval == 1:
                     set_mode('eval', [execution_engine])
                 programs_pred = program_generator(questions_var)
-                zipped = zip(feats_var, programs_pred)
-                scores = execution_engine(list(zipped))
+
+                zipped = tuple((zip(feats_var, programs_pred)))
+                scores = execution_engine(zipped)
+
                 loss = loss_fn(scores, answers_var)
 
                 pg_optimizer.zero_grad()
