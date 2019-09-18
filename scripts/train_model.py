@@ -437,7 +437,7 @@ def get_program_generator(args):
     print("device count = %d" % cuda.device_count())
     if cuda.device_count() > 1:
         pg = nn.DataParallel(pg)
-    pg.cuda(device=0)
+    pg.cuda()
     pg.train()
     return pg, kwargs
 
@@ -485,7 +485,9 @@ def get_execution_engine(args):
             ee = ModuleNet(**kwargs)
     if cuda.device_count() > 1:
         ee = nn.DataParallel(ee)
-    ee.cuda(device=0)
+        ee.to(torch.device('cuda:0'))
+    else:
+        ee.cuda(device=0)
     ee.train()
     return ee, kwargs
 
