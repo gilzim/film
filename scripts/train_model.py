@@ -293,11 +293,9 @@ def train_loop(args, train_loader, val_loader):
                 print("film", programs_pred.size())
                 # zipped = tuple(zip(feats_var, programs_pred))
                 # print("zipped_train", zipped.__len__())
-                dic = {
-                    'x': feats_var,
-                    'film': programs_pred
-                }
-                scores = execution_engine(dic)
+
+                xfilm = (feats_var, programs_pred)
+                scores = execution_engine(xfilm)
 
                 loss = loss_fn(scores, answers_var)
 
