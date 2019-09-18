@@ -242,7 +242,7 @@ def train_loop(args, train_loader, val_loader):
         print('Here is the baseline model')
         print(baseline_model)
         baseline_type = args.model_type
-    loss_fn = torch.nn.CrossEntropyLoss().cuda()
+    loss_fn = torch.nn.CrossEntropyLoss().cuda(device=0)
 
     stats = {
         'train_losses': [], 'train_rewards': [], 'train_losses_ts': [],
@@ -277,11 +277,11 @@ def train_loop(args, train_loader, val_loader):
             questions, _, feats, answers, programs, _ = batch
             if isinstance(questions, list):
                 questions = questions[0]
-            questions_var = Variable(questions.cuda())
-            feats_var = Variable(feats.cuda())
-            answers_var = Variable(answers.cuda())
+            questions_var = Variable(questions.cuda(device=0))
+            feats_var = Variable(feats.cuda(device=0))
+            answers_var = Variable(answers.cuda(device=0))
             if programs[0] is not None:
-                programs_var = Variable(programs.cuda())
+                programs_var = Variable(programs.cuda(device=0))
 
             reward = None
             if args.model_type == 'FiLM':
@@ -437,7 +437,7 @@ def get_program_generator(args):
     print("device count = %d" % cuda.device_count())
     if cuda.device_count() > 1:
         pg = nn.DataParallel(pg)
-    pg.cuda()
+    pg.cuda(device=0)
     pg.train()
     return pg, kwargs
 
@@ -485,7 +485,7 @@ def get_execution_engine(args):
             ee = ModuleNet(**kwargs)
     if cuda.device_count() > 1:
         ee = nn.DataParallel(ee)
-    ee.cuda()
+    ee.cuda(device=0)
     ee.train()
     return ee, kwargs
 
@@ -547,7 +547,7 @@ def get_baseline_model(args):
             model.rnn.token_to_idx[token] = idx
         kwargs['vocab'] = vocab
         model.rnn.expand_vocab(vocab['question_token_to_idx'])
-    model.cuda()
+    model.cuda(device=0)
     model.train()
     return model, kwargs
 
@@ -568,11 +568,11 @@ def check_accuracy(args, program_generator, execution_engine, baseline_model, lo
         if isinstance(questions, list):
             questions = questions[0]
 
-        questions_var = Variable(questions.cuda(), volatile=True)
-        feats_var = Variable(feats.cuda(), volatile=True)
-        answers_var = Variable(feats.cuda(), volatile=True)
+        questions_var = Variable(questions.cuda(device=0), volatile=True)
+        feats_var = Variable(feats.cuda(device=0), volatile=True)
+        answers_var = Variable(feats.cuda(device=0), volatile=True)
         if programs[0] is not None:
-            programs_var = Variable(programs.cuda(), volatile=True)
+            programs_var = Variable(programs.cuda(device=0), volatile=True)
 
         scores = None  # Use this for everything but PG
 
