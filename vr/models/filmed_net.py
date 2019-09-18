@@ -154,8 +154,8 @@ class FiLMedNet(nn.Module):
         print(x)
         print("==film==")
         print(film)
-        x = torch.reshape(x, (n, x_c, x_h, x_w))
-        film = torch.reshape(film, (n, f_h, f_w))
+        x = x.view((n, x_c, x_h, x_w))
+        film = film.view((n, f_h, f_w))
         print(x.size(), film.size())
 
         # Initialize forward pass and externally viewable activations
