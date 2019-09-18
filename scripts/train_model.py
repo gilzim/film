@@ -291,7 +291,8 @@ def train_loop(args, train_loader, val_loader):
                 print(type(feats_var), type(programs_pred))
                 print(feats_var.size())
                 print(programs_pred.size())
-                scores = execution_engine(feats_var, programs_pred)
+                zipped = zip(feats_var, programs_pred)
+                scores = execution_engine(zipped)
                 loss = loss_fn(scores, answers_var)
 
                 pg_optimizer.zero_grad()

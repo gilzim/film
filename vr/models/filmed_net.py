@@ -138,7 +138,15 @@ class FiLMedNet(nn.Module):
 
         init_modules(self.modules())
 
-    def forward(self, x, film, save_activations=False):
+    '''
+    zipped_arg - a zip object of Variable x and Variable of gammas & betas
+    '''
+    def forward(self, zipped_arg, save_activations=False):
+        # parse zipped_arg
+        x, film = list(zip(*zipped_arg))
+        x = torch.stack(x)
+        film = torch.stack(film)
+
         # Initialize forward pass and externally viewable activations
         self.fwd_count += 1
         if save_activations:
