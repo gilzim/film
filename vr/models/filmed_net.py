@@ -147,6 +147,7 @@ class FiLMedNet(nn.Module):
         x = torch.stack(x)
         film = torch.stack(film)
 
+        print("zipped_forward", zipped_arg.__len__())
         print("parsed x", x.size())
         print("parsed film", film.size())
 
