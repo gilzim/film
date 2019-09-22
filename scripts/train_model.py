@@ -268,6 +268,7 @@ def train_loop(args, train_loader, val_loader):
             epoch_total_time += epoch_time
             print(colored('EPOCH PASS AVG TIME: ' + str(epoch_total_time / epoch), 'white'))
             print(colored('Epoch Pass Time      : ' + str(epoch_time), 'white'))
+            sys.stdout.flush()
         epoch_start_time = time.time()
 
         epoch += 1
@@ -379,6 +380,7 @@ def train_loop(args, train_loader, val_loader):
             if t == args.num_iterations:
                 break
 
+        sys.stdout.flush()
 
 def parse_int_list(s):
     if s == '': return ()
