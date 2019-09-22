@@ -5,11 +5,12 @@ log_path="data/film.log"
 python scripts/train_model.py \
   --checkpoint_path $checkpoint_path \
   --model_type FiLM \
-  --num_iterations 20000000 \
-  --print_verbose_every 20000000 \
+  --num_iterations 200000 \
+  --print_verbose_every 200000 \
   --checkpoint_every 100000 \
-  --record_loss_every 100 \
-  --num_val_samples 149991 \
+  --record_loss_every 10000 \
+  --num_train_samples 350000 \
+  --num_val_samples 75000 \
   --optimizer Adam \
   --learning_rate 3e-4 \
   --batch_size 64 \
@@ -44,5 +45,6 @@ python scripts/train_model.py \
   --use_gamma 1 \
   --use_beta 1 \
   --condition_method bn-film \
+  --cbn_method no-cbn \
   --program_generator_parameter_efficient 1 \
   | tee $log_path
