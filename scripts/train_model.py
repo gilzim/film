@@ -35,6 +35,8 @@ from vr.data import ClevrDataset, ClevrDataLoader
 from vr.models import ModuleNet, Seq2Seq, LstmModel, CnnLstmModel, CnnLstmSaModel
 from vr.models import FiLMedNet
 from vr.models import FiLMGen
+import torch.nn as nn
+import torch.cuda as cuda
 
 
 parser = argparse.ArgumentParser()
@@ -104,6 +106,7 @@ parser.add_argument('--module_input_proj', default=1, type=int)  # Inp conv kern
 parser.add_argument('--module_kernel_size', default=3, type=int)
 parser.add_argument('--condition_method', default='bn-film', type=str,
                     choices=['block-input-film', 'block-output-film', 'bn-film', 'concat', 'conv-film', 'relu-film'])
+parser.add_argument('--final_resblock_with_cbn', default=4, type=int)  # last Resblock that will have cbn and not bn
 parser.add_argument('--condition_pattern', default='', type=str)  # List of 0/1's (len = # FiLMs)
 parser.add_argument('--use_gamma', default=1, type=int)
 parser.add_argument('--use_beta', default=1, type=int)
@@ -147,7 +150,7 @@ parser.add_argument('--randomize_checkpoint_path', type=int, default=0)
 parser.add_argument('--avoid_checkpoint_override', default=0, type=int)
 parser.add_argument('--record_loss_every', default=1, type=int)
 parser.add_argument('--checkpoint_every', default=10000, type=int)
-parser.add_argument('--time', default=0, type=int)
+parser.add_argument('--time', default=1, type=int)
 
 
 def main(args):
@@ -267,6 +270,7 @@ def train_loop(args, train_loader, val_loader):
             epoch_total_time += epoch_time
             print(colored('EPOCH PASS AVG TIME: ' + str(epoch_total_time / epoch), 'white'))
             print(colored('Epoch Pass Time      : ' + str(epoch_time), 'white'))
+            sys.stdout.flush()
         epoch_start_time = time.time()
 
         epoch += 1
@@ -286,6 +290,7 @@ def train_loop(args, train_loader, val_loader):
             if args.model_type == 'FiLM':
                 if args.set_execution_engine_eval == 1:
                     set_mode('eval', [execution_engine])
+
                 programs_pred = program_generator(questions_var)
                 scores = execution_engine(feats_var, programs_pred)
                 loss = loss_fn(scores, answers_var)
@@ -377,6 +382,7 @@ def train_loop(args, train_loader, val_loader):
             if t == args.num_iterations:
                 break
 
+        sys.stdout.flush()
 
 def parse_int_list(s):
     if s == '': return ()
@@ -421,12 +427,14 @@ def get_program_generator(args):
             kwargs['gamma_baseline'] = args.gamma_baseline
             kwargs['num_modules'] = args.num_modules
             kwargs['module_num_layers'] = args.module_num_layers
-            kwargs['module_dim'] = args.module_dim
+            kwargs['module_dim'] = args.module_dim * 2
             kwargs['debug_every'] = args.debug_every
             pg = FiLMGen(**kwargs)
         else:
             pg = Seq2Seq(**kwargs)
-    pg = nn.DataParallel(pg)
+    print("device count = %d" % cuda.device_count())
+    if cuda.device_count() > 1:
+        pg = nn.DataParallel(pg)
     pg.cuda()
     pg.train()
     return pg, kwargs
@@ -468,10 +476,13 @@ def get_execution_engine(args):
             kwargs['debug_every'] = args.debug_every
             kwargs['print_verbose_every'] = args.print_verbose_every
             kwargs['condition_method'] = args.condition_method
+            kwargs['final_resblock_with_cbn'] = args.final_resblock_with_cbn
             kwargs['condition_pattern'] = parse_int_list(args.condition_pattern)
             ee = FiLMedNet(**kwargs)
         else:
             ee = ModuleNet(**kwargs)
+    # if cuda.device_count() > 1:
+    #     ee = nn.DataParallel(ee)
     ee.cuda()
     ee.train()
     return ee, kwargs

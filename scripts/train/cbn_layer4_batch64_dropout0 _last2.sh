@@ -1,7 +1,7 @@
 #!/bin/bash
 
-checkpoint_path="data/film.pt"
-log_path="data/film.log"
+checkpoint_path="data/cbn_layer4_batch64_dropout0_last2.pt"
+log_path="data/cbn_layer4_batch64_dropout0_last2.log"
 python scripts/train_model.py \
   --checkpoint_path $checkpoint_path \
   --model_type FiLM \
@@ -44,8 +44,7 @@ python scripts/train_model.py \
   --gamma_baseline 1 \
   --use_gamma 1 \
   --use_beta 1 \
-  --time 1 \
   --condition_method bn-film \
-  --final_resblock_with_cbn 0 \
+  --final_resblock_with_cbn 2 \
   --program_generator_parameter_efficient 1 \
   | tee $log_path
