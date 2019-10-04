@@ -264,6 +264,8 @@ def train_loop(args, train_loader, val_loader):
     train_pass_total_time = 0.0
     val_pass_total_time = 0.0
     running_loss = 0.0
+    train_loop_start_time = time.time()
+    timed_checkpoint_flag = True
     while t < args.num_iterations:
         if (epoch > 0) and (args.time == 1):
             epoch_time = time.time() - epoch_start_time
@@ -325,7 +327,10 @@ def train_loop(args, train_loader, val_loader):
             else:
                 running_loss += loss.data[0]
 
-            if t % args.checkpoint_every == 0:
+            is_time_for_checkpoint = (time.time()-train_loop_start_time)*(1.0/3600) >= 20
+            if t % args.checkpoint_every == 0 or (is_time_for_checkpoint and timed_checkpoint_flag):
+                if is_time_for_checkpoint:
+                    timed_checkpoint_flag = False
                 num_checkpoints += 1
                 print('Checking training accuracy ... ')
                 start = time.time()
@@ -344,6 +349,7 @@ def train_loop(args, train_loader, val_loader):
                 if args.time == 1:
                     val_pass_time = (time.time() - start)
                     val_pass_total_time += val_pass_time
+                    print("Num Iterations: " + t)
                     print(colored('VAL PASS AVG TIME:   ' + str(val_pass_total_time / num_checkpoints), 'cyan'))
                     print(colored('Val Pass Time        : ' + str(val_pass_time), 'cyan'))
                 print('val accuracy is ', val_acc)
