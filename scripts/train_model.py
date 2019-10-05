@@ -349,7 +349,7 @@ def train_loop(args, train_loader, val_loader):
                 if args.time == 1:
                     val_pass_time = (time.time() - start)
                     val_pass_total_time += val_pass_time
-                    print("Num Iterations: " + t)
+                    print("Num Iterations:", t)
                     print(colored('VAL PASS AVG TIME:   ' + str(val_pass_total_time / num_checkpoints), 'cyan'))
                     print(colored('Val Pass Time        : ' + str(val_pass_time), 'cyan'))
                 print('val accuracy is ', val_acc)
