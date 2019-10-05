@@ -5,10 +5,10 @@ log_path="data/cbn_layer4_batch128_dropout0.log"
 python scripts/train_model.py \
   --checkpoint_path $checkpoint_path \
   --model_type FiLM \
-  --num_iterations 200000 \
-  --print_verbose_every 200000 \
-  --checkpoint_every 100000 \
-  --record_loss_every 10000 \
+  --num_iterations 100000 \
+  --print_verbose_every 100000 \
+  --checkpoint_every 50000 \
+  --record_loss_every 5000 \
   --num_train_samples 350000 \
   --num_val_samples 75000 \
   --optimizer Adam \
