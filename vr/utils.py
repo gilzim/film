@@ -14,7 +14,7 @@ import torch
 from vr.models import ModuleNet, Seq2Seq, LstmModel, CnnLstmModel, CnnLstmSaModel
 from vr.models import FiLMedNet
 from vr.models import FiLMGen
-import torch.nn as nn
+from collections import OrderedDict
 
 
 def invert_dict(d):
@@ -52,10 +52,14 @@ def load_program_generator(path, model_type='PG+EE'):
         print('Loading FiLMGen from ' + path)
         kwargs = get_updated_args(kwargs, FiLMGen)
         model = FiLMGen(**kwargs)
+        new_state_dict = OrderedDict()
+        for k, v in state.items():
+            name = k[7:]  # remove `module.`
+            new_state_dict[name] = v
+        state = new_state_dict
     else:
         print('Loading PG from ' + path)
         model = Seq2Seq(**kwargs)
-    model = nn.DataParallel(model)  # because the saved model was wrapped by DataParallel
     model.load_state_dict(state)
     return model, kwargs
 
