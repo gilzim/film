@@ -113,13 +113,13 @@ def main(args):
     if args.question is not None and args.image is not None:
         run_single_example(args, model, dtype, args.question)
     # Interactive mode
-    # elif args.image is not None and args.input_question_h5 is None and args.input_features_h5 is None:
-    #   feats_var = extract_image_features(args, dtype)
-    #   print(colored('Ask me something!', 'cyan'))
-    #   while True:
-    #     # Get user question
-    #     question_raw = input(">>> ")
-    #     run_single_example(args, model, dtype, question_raw, feats_var)
+    elif args.image is not None and args.input_question_h5 is None and args.input_features_h5 is None:
+        feats_var = extract_image_features(args, dtype)
+        print(colored('Ask me something!', 'cyan'))
+        while True:
+            # Get user question
+            question_raw = input(">>> ")
+            run_single_example(args, model, dtype, question_raw, feats_var)
     else:
         vocab = load_vocab(args)
         loader_kwargs = {
