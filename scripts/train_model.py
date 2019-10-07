@@ -150,7 +150,7 @@ parser.add_argument('--randomize_checkpoint_path', type=int, default=0)
 parser.add_argument('--avoid_checkpoint_override', default=0, type=int)
 parser.add_argument('--record_loss_every', default=1, type=int)
 parser.add_argument('--checkpoint_every', default=10000, type=int)
-parser.add_argument('--time', default=1, type=int)
+parser.add_argument('--time', default=0, type=int)
 
 
 def main(args):
