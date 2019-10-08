@@ -424,6 +424,8 @@ def get_program_generator(args):
             'rnn_dropout': args.rnn_dropout,
         }
         if args.model_type == 'FiLM':
+            if args.final_resblock_with_cbn > 0:
+                args.module_dim = args.module_dim * 2
             kwargs['parameter_efficient'] = args.program_generator_parameter_efficient == 1
             kwargs['output_batchnorm'] = args.rnn_output_batchnorm == 1
             kwargs['bidirectional'] = args.bidirectional == 1
@@ -433,7 +435,7 @@ def get_program_generator(args):
             kwargs['gamma_baseline'] = args.gamma_baseline
             kwargs['num_modules'] = args.num_modules
             kwargs['module_num_layers'] = args.module_num_layers
-            kwargs['module_dim'] = args.module_dim * 2
+            kwargs['module_dim'] = args.module_dim
             kwargs['debug_every'] = args.debug_every
             pg = FiLMGen(**kwargs)
         else:
