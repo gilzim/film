@@ -196,7 +196,8 @@ class FiLMedNet(nn.Module):
             else:
                 layer_output = self.function_modules[fn_num](module_inputs[:, fn_num],
                                                              film_gammas[:, fn_num, :], film_betas[:, fn_num, :],
-                                                             cbn_gammas[:, fn_num, :], cbn_betas[:, fn_num, :], batch_coords)
+                                                             None, None,  # cbn_gammas[:, fn_num, :], cbn_betas[:, fn_num, :],
+                                                             batch_coords)
 
             # Store for future computation
             if save_activations:
