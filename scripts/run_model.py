@@ -381,8 +381,8 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
     if args.output_program_stats_dir:
         if not os.path.isdir(args.output_program_stats_dir):
             os.mkdir(args.output_program_stats_dir)
-        gammas = all_programs[:, :, :pg.module_dim]
-        betas = all_programs[:, :, pg.module_dim:2 * pg.module_dim]
+        gammas = all_programs[:, :, :pg.module_dim]  # TODO change range
+        betas = all_programs[:, :, pg.module_dim:2 * pg.module_dim] # TODO change range
         gamma_means = gammas.mean(0)
         torch.save(gamma_means, os.path.join(args.output_program_stats_dir, 'gamma_means'))
         beta_means = betas.mean(0)
