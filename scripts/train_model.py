@@ -433,7 +433,7 @@ def get_program_generator(args):
             kwargs['gamma_baseline'] = args.gamma_baseline
             kwargs['num_modules'] = args.num_modules
             kwargs['module_num_layers'] = args.module_num_layers
-            kwargs['module_dim'] = args.module_dim
+            kwargs['module_dim'] = args.module_dim * 2
             kwargs['debug_every'] = args.debug_every
             pg = FiLMGen(**kwargs)
         else:
