@@ -385,6 +385,9 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
             fout.create_dataset('predicted_programs', data=all_programs.numpy())
 
     # Save FiLM params
+    print(film_params)
+    print("==========================")
+    print(np.vstack(film_params))
     np.save('film_params', np.vstack(film_params))
     if isinstance(questions, list):
         print("=== q_types: ===")
