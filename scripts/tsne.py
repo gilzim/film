@@ -19,6 +19,8 @@ if __name__ == '__main__':
     print()
     print(q_types)
 
+    print("Shapes", film_params.shape, q_types.shape)
+
     model = TSNE(n_components=3, random_state=0)
     tsne_data = model.fit_transform(film_params)
 
