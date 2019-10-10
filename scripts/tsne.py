@@ -11,7 +11,7 @@ import seaborn as sn
 if __name__ == '__main__':
     print("=== film_params load ===")
     film_params = np.load('film_params.npy')
-    n, rows, cols = film_params.shae
+    n, rows, cols = film_params.shape
     film_params = film_params.reshape((n, rows*cols))
 
     print("=== q_types load ===")
