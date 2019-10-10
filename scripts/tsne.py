@@ -16,6 +16,7 @@ if __name__ == '__main__':
 
     print("=== q_types load ===")
     q_types = np.load('q_types.npy')
+    q_types = q_types.flatten()
 
     print(film_params)
     print()
