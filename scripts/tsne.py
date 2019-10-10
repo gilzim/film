@@ -28,10 +28,10 @@ if __name__ == '__main__':
     tsne_data = model.fit_transform(film_params)
 
     tsne_data = np.vstack((tsne_data.T, q_types)).T
-    tsne_df = pd.DataFrame(data=tsne_data, columns=("x", "y", "questions"))
-    g = sn.FacetGrid(tsne_df, hue="questions", size=6)
+    tsne_df = pd.DataFrame(data=tsne_data, columns=("x", "y", "question_types"))
+    g = sn.FacetGrid(tsne_df, hue="question_types", size=10)
     g.map(plt.scatter, 'x', 'y')
-    plt.legend(loc='down right')
+    plt.legend(loc='best')
     plt.show()
     print("Done Showing")
 
