@@ -366,6 +366,8 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
         if answers[0] is not None:
             num_correct += (preds == answers).sum()
         num_samples += preds.size(0)
+    end = time.time()
+    print("Time Elapsed = ", end-start)
 
     acc = float(num_correct) / num_samples
     print('Got %d / %d = %.2f correct' % (num_correct, num_samples, 100 * acc))
