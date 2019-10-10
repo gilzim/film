@@ -11,6 +11,8 @@ import seaborn as sn
 if __name__ == '__main__':
     print("=== film_params load ===")
     film_params = np.load('film_params.npy')
+    n, rows, cols = film_params.shae
+    film_params = film_params.reshape((n, rows*cols))
 
     print("=== q_types load ===")
     q_types = np.load('q_types.npy')
@@ -21,7 +23,7 @@ if __name__ == '__main__':
 
     print("Shapes", film_params.shape, q_types.shape)
 
-    model = TSNE(n_components=3, random_state=0)
+    model = TSNE(n_components=2, random_state=0)
     tsne_data = model.fit_transform(film_params)
 
     tsne_data = np.vstack((tsne_data.T, q_types)).T
