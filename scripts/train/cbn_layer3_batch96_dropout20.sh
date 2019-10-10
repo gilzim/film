@@ -1,7 +1,7 @@
 #!/bin/bash
 
-checkpoint_path="data/cbn_layer7_batch96_dropout20.pt"
-log_path="data/cbn_layer7_batch96_dropout20.log"
+checkpoint_path="data/cbn_layer3_batch96_dropout20.pt"
+log_path="data/cbn_layer3_batch96_dropout20.log"
 python scripts/train_model.py \
   --checkpoint_path $checkpoint_path \
   --model_type FiLM \
@@ -38,8 +38,8 @@ python scripts/train_model.py \
   --module_kernel_size 3 \
   --module_batchnorm_affine 0 \
   --module_num_layers 1 \
-  --num_modules 7 \
-  --condition_pattern 1,1,1,1,1,1,1 \
+  --num_modules 3 \
+  --condition_pattern 1,1,1 \
   --gamma_option linear \
   --gamma_baseline 1 \
   --use_gamma 1 \
