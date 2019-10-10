@@ -10,12 +10,12 @@ import seaborn as sn
 
 if __name__ == '__main__':
     print("=== film_params load ===")
-    film_params = np.load('film_params.npy')
+    film_params = np.load('../film_params.npy')
     n, rows, cols = film_params.shape
     film_params = film_params.reshape((n, rows*cols))
 
     print("=== q_types load ===")
-    q_types = np.load('q_types.npy')
+    q_types = np.load('../q_types.npy')
     q_types = q_types.flatten()
 
     print(film_params)
@@ -24,12 +24,14 @@ if __name__ == '__main__':
 
     print("Shapes", film_params.shape, q_types.shape)
 
-    model = TSNE(n_components=2, random_state=0)
+    model = TSNE(n_components=2, perplexity=40, random_state=0)
     tsne_data = model.fit_transform(film_params)
 
     tsne_data = np.vstack((tsne_data.T, q_types)).T
-    tsne_df = pd.DataFrame(data=tsne_data, columns=("Dim1", "Dim2", "label"))
-    sn.FacetGrid(tsne_df, hue="label", size=6).map(plt.scatter, 'Dim1', 'Dim2')
+    tsne_df = pd.DataFrame(data=tsne_data, columns=("x", "y", "questions"))
+    g = sn.FacetGrid(tsne_df, hue="questions", size=6)
+    g.map(plt.scatter, 'x', 'y')
+    plt.legend(loc='down right')
     plt.show()
     print("Done Showing")
 
