@@ -15,6 +15,10 @@ if __name__ == '__main__':
     print("=== q_types load ===")
     q_types = np.load('q_types.npy')
 
+    print(film_params)
+    print()
+    print(q_types)
+
     model = TSNE(n_components=3, random_state=0)
     tsne_data = model.fit_transform(film_params)
 
