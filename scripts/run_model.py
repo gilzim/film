@@ -311,6 +311,7 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
         print('All words of each question shuffled.')
     elif args.num_last_words_shuffled > 0:
         print('Last %d words of each question shuffled.' % args.num_last_words_shuffled)
+    print("Start batch run")
     start = time.time()
     for batch in tqdm(loader):
         assert (not pg.training)
