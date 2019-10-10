@@ -39,7 +39,7 @@ python scripts/train_model.py \
   --module_batchnorm_affine 0 \
   --module_num_layers 1 \
   --num_modules 6 \
-  --condition_pattern 1,1,1,1 \
+  --condition_pattern 1,1,1,1,1,1 \
   --gamma_option linear \
   --gamma_baseline 1 \
   --use_gamma 1 \
