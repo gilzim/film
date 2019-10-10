@@ -31,5 +31,6 @@ if __name__ == '__main__':
     tsne_df = pd.DataFrame(data=tsne_data, columns=("Dim1", "Dim2", "label"))
     sn.FacetGrid(tsne_df, hue="label", size=6).map(plt.scatter, 'Dim1', 'Dim2')
     plt.show()
+    print("Done Showing")
 
 
