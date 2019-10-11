@@ -9,22 +9,18 @@ from mpl_toolkits.mplot3d import Axes3D
 import seaborn as sn
 
 if __name__ == '__main__':
+    layer_index_to_plot = 3
     print("=== film_params load ===")
     film_params = np.load('../film_params.npy')
-    n, rows, cols = film_params.shape
-    film_params = film_params.reshape((n, rows*cols))
+    film_params = film_params[:, layer_index_to_plot, :]
 
     print("=== q_types load ===")
     q_types = np.load('../q_types.npy')
     q_types = q_types.flatten()
 
-    print(film_params)
-    print()
-    print(q_types)
-
     print("Shapes", film_params.shape, q_types.shape)
 
-    model = TSNE(n_components=2, perplexity=40, random_state=0)
+    model = TSNE(n_components=2, perplexity=50, random_state=0)
     tsne_data = model.fit_transform(film_params)
 
     tsne_data = np.vstack((tsne_data.T, q_types)).T
