@@ -42,7 +42,7 @@ python run_model.py --program_generator <FiLM Generator filepath> --execution_en
 ```
 When FiLM Generator filepath and FiLMed Network filepath are the same.
 
-By default, the command runs on [this CLEVR image](img/CLEVR_val_000017.png), but you may modify which image to use via command line flag to test on any CLEVR image.
+By default, the command runs on [this CLEVR image](https://github.com/gilzim/film/blob/CBN_layers/img/CLEVR_val_000017.png), but you may modify which image to use via command line flag to test on any CLEVR image.
 
 CLEVR vocab is enforced by default, but for CLEVR-Humans models, for example, you may append the command line flag option 
 '--enforce_clevr_vocab 0' to ask any string of characters you please.
