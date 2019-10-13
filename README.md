@@ -1,6 +1,6 @@
 # FiBN: Visual Reasoning with a General Conditioning Layer and Conditional Batch Normalization
 
-### Fodler Structure
+### Folder Structure
 
 This code is a fork from the code for "FiLM: Visual Reasoning with a General Conditioning Layer" available [here](https://github.com/ethanjperez/film).
 
@@ -10,9 +10,9 @@ the vr folder includes .py files for preprocessing data, a utils.py file for loa
 and the models package which contatins the implementations of the different layers and models.
 
 the scripts folder includes .py files for preprocessing the data, .py files for training and running models 
-and  the train folder which contains .sh scripts for training film and fibn models.
+and  the train folder which contains .sh scripts for training FiLM and FiBN models.
 
-the img folder includes example pictures of the CLEVR dataset and the stats folder which contains gammas and betas distributions of the fibn model.
+the img folder includes example pictures of the CLEVR dataset and the stats folder which contains gammas and betas distributions of the FiBN model.
 
 ### Setup
 Becuase we essentialy use the FiLM model, the setup instructions for the FiBN model are the same as FiLM.
