@@ -15,7 +15,7 @@ and  the train folder which contains .sh scripts for training FiLM and FiBN mode
 the img folder includes example pictures of the CLEVR dataset and the stats folder which contains gammas and betas distributions of the FiBN model.
 
 ### Setup
-Becuase we essentialy use the FiLM model, the setup instructions for the FiBN model are the same as FiLM.
+Because we essentialy use the FiLM model, the setup instructions for the FiBN model are the same as FiLM.
 from FiLM's README.md:
 
 First, follow the virtual environment setup [instructions](https://github.com/facebookresearch/clevr-iep#setup).
