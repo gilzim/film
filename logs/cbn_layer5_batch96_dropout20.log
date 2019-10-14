@@ -1,0 +1,143 @@
+Will save checkpoints to data/cbn_layer5_batch96_dropout20.pt
+Reading features from data/train_features.h5
+Reading questions from  data/train_questions.h5
+Reading question data into memory
+Reading features from data/val_features.h5
+Reading questions from  data/val_questions.h5
+Reading question data into memory
+device count = 2
+Here is the conditioning network:
+DataParallel (
+  (module): FiLMGen (
+    (encoder_embed): Embedding(93, 200)
+    (encoder_rnn): GRU(200, 4096, batch_first=True)
+    (decoder_linear): Linear (4096 -> 2560)
+  )
+)
+Here is the conditioned network:
+FiLMedNet (
+  (stem): Sequential (
+    (0): Conv2d(1026, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True)
+    (2): ReLU (inplace)
+  )
+  (0): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (cbn): CBN (
+    )
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.2)
+  )
+  (1): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (cbn): CBN (
+    )
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.2)
+  )
+  (2): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (cbn): CBN (
+    )
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.2)
+  )
+  (3): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (cbn): CBN (
+    )
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.2)
+  )
+  (4): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (cbn): CBN (
+    )
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.2)
+  )
+  (classifier): Sequential (
+    (0): Conv2d(130, 512, kernel_size=(1, 1), stride=(1, 1))
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True)
+    (2): ReLU (inplace)
+    (3): MaxPool2d (size=(14, 14), stride=(14, 14), dilation=(1, 1))
+    (4): Flatten (
+    )
+    (5): Linear (512 -> 1024)
+    (6): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True)
+    (7): ReLU (inplace)
+    (8): Linear (1024 -> 32)
+  )
+)
+train_loader has 350000 samples
+val_loader has 75000 samples
+Starting epoch 1
+Starting epoch 2
+Starting epoch 3
+10000 0.9805075647890568
+Starting epoch 4
+Starting epoch 5
+Starting epoch 6
+20000 0.9430155996084213
+Starting epoch 7
+Starting epoch 8
+Starting epoch 9
+30000 0.9302739460229874
+Starting epoch 10
+Starting epoch 11
+40000 0.9203363904178142
+Starting epoch 12
+Starting epoch 13
+Starting epoch 14
+50000 0.9050660889148712
+Starting epoch 15
+Starting epoch 16
+Starting epoch 17
+60000 0.8846324461400509
+Starting epoch 18
+Starting epoch 19
+Checking training accuracy ... 
+train accuracy is 0.57370257885763
+Checking validation accuracy ...
+val accuracy is  0.5063333333333333
+Saving checkpoint to data/cbn_layer5_batch96_dropout20.pt
+Starting epoch 20
+70000 0.8578949056744576
+Starting epoch 21
+Starting epoch 22
+80000 0.8271376111328602
+Starting epoch 23
+Starting epoch 24
+Starting epoch 25
+90000 0.78882744333148
+Starting epoch 26
+Starting epoch 27
+Starting epoch 28
+100000 0.7451371909499168
+Starting epoch 29
+Starting epoch 30
+Starting epoch 31
+110000 0.6973886854469776
+Starting epoch 32
+Starting epoch 33
+120000 0.64489661693573
+Starting epoch 34
+Starting epoch 35
+Starting epoch 36
+130000 0.5917551012128591
+Starting epoch 37
+Checking training accuracy ... 
+train accuracy is 0.7813965260017051
+Checking validation accuracy ...
+val accuracy is  0.5012266666666667
+Saving checkpoint to data/cbn_layer5_batch96_dropout20.pt

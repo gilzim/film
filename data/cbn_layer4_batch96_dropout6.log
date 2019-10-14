@@ -1,0 +1,220 @@
+Will save checkpoints to data/cbn_layer4_batch96_dropout6.pt
+Reading features from data/train_features.h5
+Reading questions from  data/train_questions.h5
+Reading question data into memory
+Reading features from data/val_features.h5
+Reading questions from  data/val_questions.h5
+Reading question data into memory
+device count = 2
+Here is the conditioning network:
+DataParallel (
+  (module): FiLMGen (
+    (encoder_embed): Embedding(93, 200)
+    (encoder_rnn): GRU(200, 4096, batch_first=True)
+    (decoder_linear): Linear (4096 -> 2048)
+  )
+)
+Here is the conditioned network:
+FiLMedNet (
+  (stem): Sequential (
+    (0): Conv2d(1026, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True)
+    (2): ReLU (inplace)
+  )
+  (0): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.06)
+    (cbn): CBN (
+    )
+  )
+  (1): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.06)
+    (cbn): CBN (
+    )
+  )
+  (2): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.06)
+    (cbn): CBN (
+    )
+  )
+  (3): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
+    (film): FiLM (
+    )
+    (drop): Dropout2d (p=0.06)
+    (cbn): CBN (
+    )
+  )
+  (classifier): Sequential (
+    (0): Conv2d(130, 512, kernel_size=(1, 1), stride=(1, 1))
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True)
+    (2): ReLU (inplace)
+    (3): MaxPool2d (size=(14, 14), stride=(14, 14), dilation=(1, 1))
+    (4): Flatten (
+    )
+    (5): Linear (512 -> 1024)
+    (6): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True)
+    (7): ReLU (inplace)
+    (8): Linear (1024 -> 32)
+  )
+)
+train_loader has 350000 samples
+val_loader has 75000 samples
+Starting epoch 1
+[37mEPOCH PASS AVG TIME: 2233.9687254428864[0m
+[37mEpoch Pass Time      : 2233.9687254428864[0m
+Starting epoch 2
+[37mEPOCH PASS AVG TIME: 1857.0524398088455[0m
+[37mEpoch Pass Time      : 1480.1361541748047[0m
+Starting epoch 3
+10000 0.9754531661033631
+[37mEPOCH PASS AVG TIME: 1733.0999456246693[0m
+[37mEpoch Pass Time      : 1485.1949572563171[0m
+Starting epoch 4
+[37mEPOCH PASS AVG TIME: 1666.6823847293854[0m
+[37mEpoch Pass Time      : 1467.4297020435333[0m
+Starting epoch 5
+[37mEPOCH PASS AVG TIME: 1624.3527637958528[0m
+[37mEpoch Pass Time      : 1455.0342800617218[0m
+Starting epoch 6
+20000 0.9187200157284736
+[37mEPOCH PASS AVG TIME: 1596.036752263705[0m
+[37mEpoch Pass Time      : 1454.4566946029663[0m
+Starting epoch 7
+[37mEPOCH PASS AVG TIME: 1575.4422871044703[0m
+[37mEpoch Pass Time      : 1451.875496149063[0m
+Starting epoch 8
+[37mEPOCH PASS AVG TIME: 1560.4362849891186[0m
+[37mEpoch Pass Time      : 1455.3942701816559[0m
+Starting epoch 9
+30000 0.8275062278985977
+[37mEPOCH PASS AVG TIME: 1548.79196551111[0m
+[37mEpoch Pass Time      : 1455.6374096870422[0m
+Starting epoch 10
+[37mEPOCH PASS AVG TIME: 1540.0498262405395[0m
+[37mEpoch Pass Time      : 1461.3705728054047[0m
+Starting epoch 11
+40000 0.6445952051013708
+[37mEPOCH PASS AVG TIME: 1533.8230636119843[0m
+[37mEpoch Pass Time      : 1471.5554373264313[0m
+Starting epoch 12
+[37mEPOCH PASS AVG TIME: 1527.7335209647815[0m
+[37mEpoch Pass Time      : 1460.7485518455505[0m
+Starting epoch 13
+[37mEPOCH PASS AVG TIME: 1523.8101239938003[0m
+[37mEpoch Pass Time      : 1476.7293603420258[0m
+Starting epoch 14
+50000 0.5430220085322857
+[37mEPOCH PASS AVG TIME: 1522.6305520193916[0m
+[37mEpoch Pass Time      : 1507.2961163520813[0m
+Starting epoch 15
+[37mEPOCH PASS AVG TIME: 1521.649891090393[0m
+[37mEpoch Pass Time      : 1507.9206380844116[0m
+Starting epoch 16
+[37mEPOCH PASS AVG TIME: 1520.7146709263325[0m
+[37mEpoch Pass Time      : 1506.6863684654236[0m
+Starting epoch 17
+60000 0.4804236391454935
+[37mEPOCH PASS AVG TIME: 1520.006594657898[0m
+[37mEpoch Pass Time      : 1508.6773743629456[0m
+Starting epoch 18
+[37mEPOCH PASS AVG TIME: 1519.3277496496837[0m
+[37mEpoch Pass Time      : 1507.7873845100403[0m
+Starting epoch 19
+Checking training accuracy ... 
+[31mTRAIN PASS AVG TIME: 271.81246852874756[0m
+[31mTrain Pass Time      : 271.81246852874756[0m
+train accuracy is 0.8036684782608695
+Checking validation accuracy ...
+Num Iterations: 66666
+[36mVAL PASS AVG TIME:   269.34936809539795[0m
+[36mVal Pass Time        : 269.34936809539795[0m
+val accuracy is  0.7242
+Saving checkpoint to data/cbn_layer4_batch96_dropout6.pt
+[37mEPOCH PASS AVG TIME: 1546.3272081048865[0m
+[37mEpoch Pass Time      : 2032.3174602985382[0m
+Starting epoch 20
+70000 0.4383800812587142
+[37mEPOCH PASS AVG TIME: 1543.3035426855088[0m
+[37mEpoch Pass Time      : 1485.853899717331[0m
+Starting epoch 21
+[37mEPOCH PASS AVG TIME: 1541.1955931186676[0m
+[37mEpoch Pass Time      : 1499.036601781845[0m
+Starting epoch 22
+80000 0.38888168922662736
+[37mEPOCH PASS AVG TIME: 1539.7179403738542[0m
+[37mEpoch Pass Time      : 1508.6872327327728[0m
+Starting epoch 23
+[37mEPOCH PASS AVG TIME: 1538.207216096961[0m
+[37mEpoch Pass Time      : 1504.97128200531[0m
+Starting epoch 24
+[37mEPOCH PASS AVG TIME: 1535.9360103011131[0m
+[37mEpoch Pass Time      : 1483.6982769966125[0m
+Starting epoch 25
+90000 0.3372979116648436
+[37mEPOCH PASS AVG TIME: 1533.7293820381165[0m
+[37mEpoch Pass Time      : 1480.7703037261963[0m
+Starting epoch 26
+[37mEPOCH PASS AVG TIME: 1531.5928161052557[0m
+[37mEpoch Pass Time      : 1478.1786677837372[0m
+Starting epoch 27
+[37mEPOCH PASS AVG TIME: 1529.4759558395103[0m
+[37mEpoch Pass Time      : 1474.43758893013[0m
+Starting epoch 28
+100000 0.2895383353665471
+[37mEPOCH PASS AVG TIME: 1527.5306908488274[0m
+[37mEpoch Pass Time      : 1475.0085361003876[0m
+Starting epoch 29
+[37mEPOCH PASS AVG TIME: 1525.9985348849461[0m
+[37mEpoch Pass Time      : 1483.0981678962708[0m
+Starting epoch 30
+[37mEPOCH PASS AVG TIME: 1524.481289323171[0m
+[37mEpoch Pass Time      : 1480.4811680316925[0m
+Starting epoch 31
+110000 0.24619885128587485
+[37mEPOCH PASS AVG TIME: 1522.5231074133228[0m
+[37mEpoch Pass Time      : 1463.7776501178741[0m
+Starting epoch 32
+[37mEPOCH PASS AVG TIME: 1520.5202715992928[0m
+[37mEpoch Pass Time      : 1458.4323613643646[0m
+Starting epoch 33
+120000 0.20797423412315547
+[37mEPOCH PASS AVG TIME: 1518.5242791320338[0m
+[37mEpoch Pass Time      : 1454.6525201797485[0m
+Starting epoch 34
+[37mEPOCH PASS AVG TIME: 1516.5675093356301[0m
+[37mEpoch Pass Time      : 1451.994106054306[0m
+Starting epoch 35
+[37mEPOCH PASS AVG TIME: 1514.8061981882367[0m
+[37mEpoch Pass Time      : 1454.9216191768646[0m
+Starting epoch 36
+130000 0.17528214095048605
+[37mEPOCH PASS AVG TIME: 1512.1278289688958[0m
+[37mEpoch Pass Time      : 1418.3849062919617[0m
+Starting epoch 37
+Checking training accuracy ... 
+[31mTRAIN PASS AVG TIME: 261.70569825172424[0m
+[31mTrain Pass Time      : 251.59892797470093[0m
+train accuracy is 0.960051683716965
+Checking validation accuracy ...
+Num Iterations: 133332
+[36mVAL PASS AVG TIME:   259.20351326465607[0m
+[36mVal Pass Time        : 249.05765843391418[0m
+val accuracy is  0.7442133333333333
+Saving checkpoint to data/cbn_layer4_batch96_dropout6.pt

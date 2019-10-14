@@ -5,6 +5,10 @@ Reading question data into memory
 Reading features from data/val_features.h5
 Reading questions from  data/val_questions.h5
 Reading question data into memory
+<<<<<<< HEAD
+=======
+device count = 2
+>>>>>>> master
 Here is the conditioning network:
 DataParallel (
   (module): FiLMGen (
@@ -26,6 +30,11 @@ FiLMedNet (
     (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
     (film): FiLM (
     )
+<<<<<<< HEAD
+=======
+    (cbn): CBN (
+    )
+>>>>>>> master
   )
   (1): FiLMedResBlock (
     (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
@@ -33,6 +42,11 @@ FiLMedNet (
     (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
     (film): FiLM (
     )
+<<<<<<< HEAD
+=======
+    (cbn): CBN (
+    )
+>>>>>>> master
   )
   (2): FiLMedResBlock (
     (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
@@ -40,6 +54,11 @@ FiLMedNet (
     (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
     (film): FiLM (
     )
+<<<<<<< HEAD
+=======
+    (cbn): CBN (
+    )
+>>>>>>> master
   )
   (3): FiLMedResBlock (
     (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
@@ -47,6 +66,11 @@ FiLMedNet (
     (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
     (film): FiLM (
     )
+<<<<<<< HEAD
+=======
+    (cbn): CBN (
+    )
+>>>>>>> master
   )
   (classifier): Sequential (
     (0): Conv2d(130, 512, kernel_size=(1, 1), stride=(1, 1))
@@ -61,6 +85,7 @@ FiLMedNet (
     (8): Linear (1024 -> 32)
   )
 )
+<<<<<<< HEAD
 train_loader has 699989 samples
 val_loader has 149991 samples
 Starting epoch 1
@@ -3332,3 +3357,156 @@ Starting epoch 29
 [37mEPOCH PASS AVG TIME: 2941.710326720928[0m
 [37mEpoch Pass Time      : 2954.4885218143463[0m
 Starting epoch 30
+=======
+train_loader has 350000 samples
+val_loader has 75000 samples
+Starting epoch 1
+[37mEPOCH PASS AVG TIME: 2275.905843257904[0m
+[37mEpoch Pass Time      : 2275.905843257904[0m
+Starting epoch 2
+10000 0.9678447133541107
+[37mEPOCH PASS AVG TIME: 1928.92716050148[0m
+[37mEpoch Pass Time      : 1581.9484777450562[0m
+Starting epoch 3
+[37mEPOCH PASS AVG TIME: 1811.2295703093212[0m
+[37mEpoch Pass Time      : 1575.834389925003[0m
+Starting epoch 4
+20000 0.8062432434052229
+[37mEPOCH PASS AVG TIME: 1753.6885238289833[0m
+[37mEpoch Pass Time      : 1581.06538438797[0m
+Starting epoch 5
+[37mEPOCH PASS AVG TIME: 1718.0474870204926[0m
+[37mEpoch Pass Time      : 1575.4833397865295[0m
+Starting epoch 6
+30000 0.5753093968629837
+[37mEPOCH PASS AVG TIME: 1695.5703964233398[0m
+[37mEpoch Pass Time      : 1583.1849434375763[0m
+Starting epoch 7
+[37mEPOCH PASS AVG TIME: 1679.0643923623222[0m
+[37mEpoch Pass Time      : 1580.0283679962158[0m
+Starting epoch 8
+40000 0.43322094788253307
+[37mEPOCH PASS AVG TIME: 1667.0817382335663[0m
+[37mEpoch Pass Time      : 1583.2031593322754[0m
+Starting epoch 9
+[37mEPOCH PASS AVG TIME: 1657.9428074889713[0m
+[37mEpoch Pass Time      : 1584.8313615322113[0m
+Starting epoch 10
+50000 0.32876342900916933
+[37mEPOCH PASS AVG TIME: 1650.2427743673325[0m
+[37mEpoch Pass Time      : 1580.942476272583[0m
+Starting epoch 11
+60000 0.261795105971396
+[37mEPOCH PASS AVG TIME: 1643.7598451917822[0m
+[37mEpoch Pass Time      : 1578.9305534362793[0m
+Starting epoch 12
+[37mEPOCH PASS AVG TIME: 1638.2277314662933[0m
+[37mEpoch Pass Time      : 1577.3744804859161[0m
+Starting epoch 13
+70000 0.2078733911767602
+[37mEPOCH PASS AVG TIME: 1633.1490216438588[0m
+[37mEpoch Pass Time      : 1572.204503774643[0m
+Starting epoch 14
+[37mEPOCH PASS AVG TIME: 1629.0963169506617[0m
+[37mEpoch Pass Time      : 1576.4111559391022[0m
+Starting epoch 15
+80000 0.17896330025196075
+[37mEPOCH PASS AVG TIME: 1625.65129143397[0m
+[37mEpoch Pass Time      : 1577.4209342002869[0m
+Starting epoch 16
+[37mEPOCH PASS AVG TIME: 1622.6382809728384[0m
+[37mEpoch Pass Time      : 1577.4431240558624[0m
+Starting epoch 17
+90000 0.15824724232573062
+[37mEPOCH PASS AVG TIME: 1620.0108702603509[0m
+[37mEpoch Pass Time      : 1577.97229886055[0m
+Starting epoch 18
+[37mEPOCH PASS AVG TIME: 1617.6494417190552[0m
+[37mEpoch Pass Time      : 1577.5051565170288[0m
+Starting epoch 19
+100000 0.14074997966638766
+Checking training accuracy ... 
+[31mTRAIN PASS AVG TIME: 264.48845767974854[0m
+[31mTrain Pass Time      : 264.48845767974854[0m
+train accuracy is 0.9570845776450512
+Checking validation accuracy ...
+Num Iterations: 100000
+[36mVAL PASS AVG TIME:   261.9550814628601[0m
+[36mVal Pass Time        : 261.9550814628601[0m
+val accuracy is  0.8928133333333333
+Saving checkpoint to data/film.pt
+[37mEPOCH PASS AVG TIME: 1643.3345480843593[0m
+[37mEpoch Pass Time      : 2105.666462659836[0m
+Starting epoch 20
+[37mEPOCH PASS AVG TIME: 1640.0172706842422[0m
+[37mEpoch Pass Time      : 1576.989000082016[0m
+Starting epoch 21
+110000 0.12519064601315186
+[37mEPOCH PASS AVG TIME: 1637.0825524216607[0m
+[37mEpoch Pass Time      : 1578.3881871700287[0m
+Starting epoch 22
+120000 0.11074815606214106
+[37mEPOCH PASS AVG TIME: 1634.3870351856406[0m
+[37mEpoch Pass Time      : 1577.7811732292175[0m
+Starting epoch 23
+[37mEPOCH PASS AVG TIME: 1631.949369005535[0m
+[37mEpoch Pass Time      : 1578.320713043213[0m
+Starting epoch 24
+130000 0.09699999579153955
+[37mEPOCH PASS AVG TIME: 1630.007213840882[0m
+[37mEpoch Pass Time      : 1585.3376450538635[0m
+Starting epoch 25
+[37mEPOCH PASS AVG TIME: 1628.3857967567444[0m
+[37mEpoch Pass Time      : 1589.471786737442[0m
+Starting epoch 26
+140000 0.0868392336240504
+[37mEPOCH PASS AVG TIME: 1627.0781485209097[0m
+[37mEpoch Pass Time      : 1594.3869426250458[0m
+Starting epoch 27
+[37mEPOCH PASS AVG TIME: 1625.6084751199794[0m
+[37mEpoch Pass Time      : 1587.3969666957855[0m
+Starting epoch 28
+150000 0.07926689276951365
+[37mEPOCH PASS AVG TIME: 1624.0347490480967[0m
+[37mEpoch Pass Time      : 1581.5441451072693[0m
+Starting epoch 29
+[37mEPOCH PASS AVG TIME: 1621.9338314533234[0m
+[37mEpoch Pass Time      : 1563.1081387996674[0m
+Starting epoch 30
+160000 0.07312762838709168
+[37mEPOCH PASS AVG TIME: 1619.074057976405[0m
+[37mEpoch Pass Time      : 1536.1406271457672[0m
+Starting epoch 31
+[37mEPOCH PASS AVG TIME: 1616.048791893067[0m
+[37mEpoch Pass Time      : 1525.290809392929[0m
+Starting epoch 32
+170000 0.06754052168510388
+[37mEPOCH PASS AVG TIME: 1613.2314332276583[0m
+[37mEpoch Pass Time      : 1525.8933145999908[0m
+Starting epoch 33
+180000 0.062353950653970244
+[37mEPOCH PASS AVG TIME: 1610.5275047042153[0m
+[37mEpoch Pass Time      : 1524.0017919540405[0m
+Starting epoch 34
+[37mEPOCH PASS AVG TIME: 1607.938034008531[0m
+[37mEpoch Pass Time      : 1522.485501050949[0m
+Starting epoch 35
+190000 0.05773529219222255
+[37mEPOCH PASS AVG TIME: 1605.5408199242183[0m
+[37mEpoch Pass Time      : 1524.0355410575867[0m
+Starting epoch 36
+[37mEPOCH PASS AVG TIME: 1603.2357823914951[0m
+[37mEpoch Pass Time      : 1522.5594687461853[0m
+Starting epoch 37
+200000 0.0552851383556379
+Checking training accuracy ... 
+[31mTRAIN PASS AVG TIME: 257.5229637622833[0m
+[31mTrain Pass Time      : 250.55746984481812[0m
+train accuracy is 0.9809620307167235
+Checking validation accuracy ...
+Num Iterations: 200000
+[36mVAL PASS AVG TIME:   256.6774376630783[0m
+[36mVal Pass Time        : 251.3997938632965[0m
+val accuracy is  0.89772
+Saving checkpoint to data/film.pt
+>>>>>>> master

@@ -73,6 +73,7 @@ FiLMedNet (
 train_loader has 350000 samples
 val_loader has 75000 samples
 Starting epoch 1
+<<<<<<< HEAD
 [37mEPOCH PASS AVG TIME: 2014.7874007225037[0m
 [37mEpoch Pass Time      : 2014.7874007225037[0m
 Starting epoch 2
@@ -217,3 +218,12 @@ Starting epoch 35
 [37mEPOCH PASS AVG TIME: 2177.7099567072732[0m
 [37mEpoch Pass Time      : 2192.3747220039368[0m
 Starting epoch 36
+=======
+[37mEPOCH PASS AVG TIME: 2018.8451523780823[0m
+[37mEpoch Pass Time      : 2018.8451523780823[0m
+Starting epoch 2
+5000 0.9790218725919724
+[37mEPOCH PASS AVG TIME: 2029.8058903217316[0m
+[37mEpoch Pass Time      : 2040.7666282653809[0m
+Starting epoch 3
+>>>>>>> master
