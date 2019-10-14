@@ -1,0 +1,219 @@
+Will save checkpoints to data/cbn_layer4_batch128_dropout0.pt
+Reading features from data/train_features.h5
+Reading questions from  data/train_questions.h5
+Reading question data into memory
+Reading features from data/val_features.h5
+Reading questions from  data/val_questions.h5
+Reading question data into memory
+device count = 2
+Here is the conditioning network:
+DataParallel (
+  (module): FiLMGen (
+    (encoder_embed): Embedding(93, 200)
+    (encoder_rnn): GRU(200, 4096, batch_first=True)
+    (decoder_linear): Linear (4096 -> 2048)
+  )
+)
+Here is the conditioned network:
+FiLMedNet (
+  (stem): Sequential (
+    (0): Conv2d(1026, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True)
+    (2): ReLU (inplace)
+  )
+  (0): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
+    (film): FiLM (
+    )
+    (cbn): CBN (
+    )
+  )
+  (1): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
+    (film): FiLM (
+    )
+    (cbn): CBN (
+    )
+  )
+  (2): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
+    (film): FiLM (
+    )
+    (cbn): CBN (
+    )
+  )
+  (3): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=False)
+    (film): FiLM (
+    )
+    (cbn): CBN (
+    )
+  )
+  (classifier): Sequential (
+    (0): Conv2d(130, 512, kernel_size=(1, 1), stride=(1, 1))
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True)
+    (2): ReLU (inplace)
+    (3): MaxPool2d (size=(14, 14), stride=(14, 14), dilation=(1, 1))
+    (4): Flatten (
+    )
+    (5): Linear (512 -> 1024)
+    (6): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True)
+    (7): ReLU (inplace)
+    (8): Linear (1024 -> 32)
+  )
+)
+train_loader has 350000 samples
+val_loader has 75000 samples
+Starting epoch 1
+[37mEPOCH PASS AVG TIME: 2014.7874007225037[0m
+[37mEpoch Pass Time      : 2014.7874007225037[0m
+Starting epoch 2
+5000 0.9851490598797799
+[37mEPOCH PASS AVG TIME: 2019.1621463298798[0m
+[37mEpoch Pass Time      : 2023.5368919372559[0m
+Starting epoch 3
+[37mEPOCH PASS AVG TIME: 2009.7029548486073[0m
+[37mEpoch Pass Time      : 1990.7845718860626[0m
+Starting epoch 4
+10000 0.9312961731672287
+[37mEPOCH PASS AVG TIME: 2003.7821906805038[0m
+[37mEpoch Pass Time      : 1986.0198981761932[0m
+Starting epoch 5
+[37mEPOCH PASS AVG TIME: 1998.3912626743318[0m
+[37mEpoch Pass Time      : 1976.827550649643[0m
+Starting epoch 6
+15000 0.8642276724338531
+[37mEPOCH PASS AVG TIME: 1993.6824682156246[0m
+[37mEpoch Pass Time      : 1970.1384959220886[0m
+Starting epoch 7
+[37mEPOCH PASS AVG TIME: 1991.8877693584986[0m
+[37mEpoch Pass Time      : 1981.119576215744[0m
+Starting epoch 8
+20000 0.7271602753460408
+[37mEPOCH PASS AVG TIME: 2016.6908185184002[0m
+[37mEpoch Pass Time      : 2190.3121626377106[0m
+Starting epoch 9
+[37mEPOCH PASS AVG TIME: 2039.8746596972148[0m
+[37mEpoch Pass Time      : 2225.3453891277313[0m
+Starting epoch 10
+25000 0.5451202881991863
+[37mEPOCH PASS AVG TIME: 2060.7939392089843[0m
+[37mEpoch Pass Time      : 2249.067454814911[0m
+Starting epoch 11
+30000 0.4694160876393318
+[37mEPOCH PASS AVG TIME: 2072.5505856600676[0m
+[37mEpoch Pass Time      : 2190.1170501708984[0m
+Starting epoch 12
+[37mEPOCH PASS AVG TIME: 2079.2469860514007[0m
+[37mEpoch Pass Time      : 2152.907390356064[0m
+Starting epoch 13
+35000 0.40294932568371294
+[37mEPOCH PASS AVG TIME: 2082.824029500668[0m
+[37mEpoch Pass Time      : 2125.748550891876[0m
+Starting epoch 14
+[37mEPOCH PASS AVG TIME: 2089.4926609141485[0m
+[37mEpoch Pass Time      : 2176.184869289398[0m
+Starting epoch 15
+40000 0.3448537200242281
+[37mEPOCH PASS AVG TIME: 2095.969595781962[0m
+[37mEpoch Pass Time      : 2186.6466839313507[0m
+Starting epoch 16
+[37mEPOCH PASS AVG TIME: 2100.2979304641485[0m
+[37mEpoch Pass Time      : 2165.222950696945[0m
+Starting epoch 17
+45000 0.2855011749267578
+[37mEPOCH PASS AVG TIME: 2110.7005839207595[0m
+[37mEpoch Pass Time      : 2277.143039226532[0m
+Starting epoch 18
+[37mEPOCH PASS AVG TIME: 2117.49003970623[0m
+[37mEpoch Pass Time      : 2232.9107880592346[0m
+Starting epoch 19
+50000 0.23916149543076753
+Checking training accuracy ... 
+[31mTRAIN PASS AVG TIME: 374.0270926952362[0m
+[31mTrain Pass Time      : 374.0270926952362[0m
+train accuracy is 0.9189953071672355
+Checking validation accuracy ...
+Num Iterations: 50000
+[36mVAL PASS AVG TIME:   377.9885604381561[0m
+[36mVal Pass Time        : 377.9885604381561[0m
+val accuracy is  0.80864
+Saving checkpoint to data/cbn_layer4_batch128_dropout0.pt
+[37mEPOCH PASS AVG TIME: 2164.1510229989103[0m
+[37mEpoch Pass Time      : 3004.048722267151[0m
+Starting epoch 20
+[37mEPOCH PASS AVG TIME: 2166.2285854816437[0m
+[37mEpoch Pass Time      : 2205.7022726535797[0m
+Starting epoch 21
+55000 0.2001625316619873
+[37mEPOCH PASS AVG TIME: 2170.584435269946[0m
+[37mEpoch Pass Time      : 2257.7014310359955[0m
+Starting epoch 22
+60000 0.16670281824022531
+[37mEPOCH PASS AVG TIME: 2173.533353176984[0m
+[37mEpoch Pass Time      : 2235.460629224777[0m
+Starting epoch 23
+[37mEPOCH PASS AVG TIME: 2174.66284963359[0m
+[37mEpoch Pass Time      : 2199.5117716789246[0m
+Starting epoch 24
+65000 0.14007721479609608
+[37mEPOCH PASS AVG TIME: 2178.820019265016[0m
+[37mEpoch Pass Time      : 2274.4349207878113[0m
+Starting epoch 25
+[37mEPOCH PASS AVG TIME: 2180.567963953018[0m
+[37mEpoch Pass Time      : 2222.5186364650726[0m
+Starting epoch 26
+70000 0.12169761624597013
+[37mEPOCH PASS AVG TIME: 2182.4942952577885[0m
+[37mEpoch Pass Time      : 2230.6525778770447[0m
+Starting epoch 27
+[37mEPOCH PASS AVG TIME: 2183.8323962335235[0m
+[37mEpoch Pass Time      : 2218.6230216026306[0m
+Starting epoch 28
+75000 0.10584476781263948
+[37mEPOCH PASS AVG TIME: 2184.169695666858[0m
+[37mEpoch Pass Time      : 2193.2767803668976[0m
+Starting epoch 29
+[37mEPOCH PASS AVG TIME: 2178.5286697930305[0m
+[37mEpoch Pass Time      : 2020.5799453258514[0m
+Starting epoch 30
+80000 0.09426643796358257
+[37mEPOCH PASS AVG TIME: 2171.7992635885876[0m
+[37mEpoch Pass Time      : 1976.6464836597443[0m
+Starting epoch 31
+[37mEPOCH PASS AVG TIME: 2165.806319990466[0m
+[37mEpoch Pass Time      : 1986.018012046814[0m
+Starting epoch 32
+85000 0.08498558290656656
+[37mEPOCH PASS AVG TIME: 2160.218007288873[0m
+[37mEpoch Pass Time      : 1986.980313539505[0m
+Starting epoch 33
+90000 0.0763681350985542
+[37mEPOCH PASS AVG TIME: 2156.1295529134345[0m
+[37mEpoch Pass Time      : 2025.2990128993988[0m
+Starting epoch 34
+Checking training accuracy ... 
+[31mTRAIN PASS AVG TIME: 366.03684401512146[0m
+[31mTrain Pass Time      : 358.0465953350067[0m
+train accuracy is 0.9757625853242321
+Checking validation accuracy ...
+Num Iterations: 91369
+[36mVAL PASS AVG TIME:   374.3767509460449[0m
+[36mVal Pass Time        : 370.7649414539337[0m
+val accuracy is  0.8092
+Saving checkpoint to data/cbn_layer4_batch128_dropout0.pt
+[37mEPOCH PASS AVG TIME: 2177.278640080901[0m
+[37mEpoch Pass Time      : 2875.1985166072845[0m
+Starting epoch 35
+95000 0.06937682969123125
+[37mEPOCH PASS AVG TIME: 2177.7099567072732[0m
+[37mEpoch Pass Time      : 2192.3747220039368[0m
+Starting epoch 36
