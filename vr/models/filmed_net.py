@@ -75,7 +75,7 @@ class FiLMedNet(nn.Module):
         self.module_dim = module_dim
         self.condition_method = condition_method
         self.final_resblock_with_cbn = final_resblock_with_cbn
-		self.with_cbn = with_cbn
+        self.with_cbn = with_cbn
         self.use_gamma = use_gamma
         self.use_beta = use_beta
         self.use_coords_freq = use_coords
