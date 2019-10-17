@@ -1,19 +1,19 @@
 #!/bin/bash
 
-checkpoint_path="data/film.pt"
-log_path="data/film.log"
+checkpoint_path="data/cbn_layer3_batch96_dropout0_removeFrom3.pt"
+log_path="data/cbn_layer3_batch96_dropout0_removeFrom3.log"
 python scripts/train_model.py \
   --checkpoint_path $checkpoint_path \
   --model_type FiLM \
-  --num_iterations 200000 \
+  --num_iterations 133333 \
   --print_verbose_every 200000 \
-  --checkpoint_every 100000 \
+  --checkpoint_every 66666 \
   --record_loss_every 10000 \
   --num_train_samples 350000 \
   --num_val_samples 75000 \
   --optimizer Adam \
   --learning_rate 3e-4 \
-  --batch_size 64 \
+  --batch_size 96 \
   --use_coords 1 \
   --module_stem_batchnorm 1 \
   --module_stem_num_layers 1 \
@@ -33,20 +33,18 @@ python scripts/train_model.py \
   --module_input_proj 1 \
   --module_residual 1 \
   --module_dim 128 \
-  --module_dropout 0e-2 \
+  --module_dropout 0 \
   --module_stem_kernel_size 3 \
   --module_kernel_size 3 \
   --module_batchnorm_affine 0 \
   --module_num_layers 1 \
-  --num_modules 4 \
-  --condition_pattern 1,1,1,1 \
+  --num_modules 3 \
+  --condition_pattern 1,1,1 \
   --gamma_option linear \
   --gamma_baseline 1 \
   --use_gamma 1 \
   --use_beta 1 \
-  --time 1 \
   --condition_method bn-film \
-  --with_cbn 0
-  --final_resblock_with_cbn 10 \
+  --final_resblock_with_cbn 0 \
   --program_generator_parameter_efficient 1 \
   | tee $log_path
