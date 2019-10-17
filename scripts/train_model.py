@@ -483,7 +483,7 @@ def get_execution_engine(args):
             kwargs['debug_every'] = args.debug_every
             kwargs['print_verbose_every'] = args.print_verbose_every
             kwargs['condition_method'] = args.condition_method
-			kwargs['with_cbn'] = args.with_cbn
+            kwargs['with_cbn'] = args.with_cbn
             kwargs['final_resblock_with_cbn'] = args.final_resblock_with_cbn
             kwargs['condition_pattern'] = parse_int_list(args.condition_pattern)
             ee = FiLMedNet(**kwargs)
