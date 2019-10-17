@@ -1,7 +1,7 @@
 #!/bin/bash
 
-checkpoint_path="data/cbn_layer3_batch96_dropout0_removeFrom3.pt"
-log_path="data/cbn_layer3_batch96_dropout0_removeFrom3.log"
+checkpoint_path="data/cbn_layer3_batch96_dropout0_removeFrom2_to3.pt"
+log_path="data/cbn_layer3_batch96_dropout0_removeFrom2_to3.log"
 python scripts/train_model.py \
   --checkpoint_path $checkpoint_path \
   --model_type FiLM \
