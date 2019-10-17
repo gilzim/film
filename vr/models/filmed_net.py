@@ -247,7 +247,7 @@ class FiLMedResBlock(nn.Module):
         self.num_layers = num_layers
         self.condition_method = condition_method
         self.with_cbn = with_cbn
-		self.use_film_cbn = use_film_cbn
+        self.use_film_cbn = use_film_cbn
         self.debug_every = debug_every
 
         if self.with_input_proj % 2 == 0:
@@ -307,14 +307,14 @@ class FiLMedResBlock(nn.Module):
         if self.condition_method == 'conv-film' and self.with_cond[0]:
             out = self.film(out, film_gammas, film_betas)
 			
-		if self.use_film_cbn:
-			if self.with_batchnorm:
-				if self.with_cbn > 0:
-					out = self.cbn(out, cbn_gammas, cbn_betas)
-				else:
-					out = self.bn1(out)
-			if self.condition_method == 'bn-film' and self.with_cond[0]:
-				out = self.film(out, film_gammas, film_betas)
+        if self.use_film_cbn:
+            if self.with_batchnorm:
+                if self.with_cbn > 0:
+                    out = self.cbn(out, cbn_gammas, cbn_betas)
+                else:
+                    out = self.bn1(out)
+            if self.condition_method == 'bn-film' and self.with_cond[0]:
+                out = self.film(out, film_gammas, film_betas)
 			
         if self.dropout > 0:
             out = self.drop(out)
