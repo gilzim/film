@@ -304,6 +304,8 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
         print('Last %d words of each question shuffled.' % args.num_last_words_shuffled)
     print("Start batch run")
     start = time.time()
+    correct_hist = [0] * 5
+    total_hist = [0] * 5
     for batch in tqdm(loader):
         assert (not pg.training)
         assert (not ee.training)
@@ -356,10 +358,15 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
         all_probs.append(probs.data.cpu().clone())
         all_preds.append(preds.cpu().clone())
         if answers[0] is not None:
+            questions_types = questions[1].cpu().numpy()
+            update_hist(questions_types, preds, answers, correct_hist, total_hist)
             num_correct += (preds == answers).sum()
         num_samples += preds.size(0)
     end = time.time()
     print("Time Elapsed = ", end-start)
+
+    acc_hist = [correct_hist[i] / total_hist[i] for i in range(len(correct_hist))]
+    print("acc_hist", acc_hist)
 
     acc = float(num_correct) / num_samples
     print('Got %d / %d = %.2f correct' % (num_correct, num_samples, 100 * acc))
@@ -388,8 +395,8 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
     if args.output_program_stats_dir:
         if not os.path.isdir(args.output_program_stats_dir):
             os.mkdir(args.output_program_stats_dir)
-        gammas = all_programs[:, :, :pg.module_dim]  # TODO change range
-        betas = all_programs[:, :, pg.module_dim:2 * pg.module_dim]  # TODO change range
+        gammas = all_programs[:, :, :pg.module_dim]
+        betas = all_programs[:, :, pg.module_dim:2 * pg.module_dim]
         gamma_means = gammas.mean(0)
         torch.save(gamma_means, os.path.join(args.output_program_stats_dir, 'gamma_means'))
         beta_means = betas.mean(0)
@@ -413,6 +420,30 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
     if args.debug_every <= 1:
         pdb.set_trace()
     return
+
+
+def question_category(q_type):
+    category = 0
+
+    if q_type == 1 or q_type == 2:
+        category = 1
+    elif q_type == 3:
+        category = 2
+    elif 5 <= q_type <= 7:
+        category = 3
+    else:
+        category = 4
+
+    return category
+
+
+def update_hist(question_types, pred, answers, hist_correct, hist_total):
+    actual = pred == answers
+    for i, q_type in enumerate(question_types):
+        category = question_category(q_type)
+        if actual[i]:
+            hist_correct[category] += 1
+        hist_total[category] += 1
 
 
 def visualize(features, args, file_name=None):
