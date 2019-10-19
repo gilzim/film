@@ -1,3 +1,5 @@
+#!/bin/bash
+
 log_path="data/run_model_fibn.log"
 python scripts/run_model.py \
 --program_generator data/cbn_layer3_batch96_dropout20.pt \

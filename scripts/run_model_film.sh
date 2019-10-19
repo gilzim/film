@@ -1,3 +1,5 @@
+#!/bin/bash
+
 log_path="data/run_model_film.log"
 python scripts/run_model.py \
 --program_generator data/film.pt \
