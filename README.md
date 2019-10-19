@@ -15,24 +15,25 @@ and  the train folder which contains .sh scripts for training FiLM and FiBN mode
 the img folder includes example pictures of the CLEVR dataset and the stats folder which contains gammas and betas distributions of the FiBN model.
 
 ### Setup
+The program must run on the linux os.
+
 Because we essentialy use the FiLM model, the setup instructions for the FiBN model are the same as FiLM.
 from FiLM's README.md:
 
 First, follow the virtual environment setup [instructions](https://github.com/facebookresearch/clevr-iep#setup).
+create an empty conda enviorment and run the following command: 
+```bash
+pip install -r requirements.txt
+```
 
 Second, follow the CLEVR data preprocessing [instructions](https://github.com/facebookresearch/clevr-iep/blob/master/TRAINING.md#preprocessing-clevr).
 
-### Trainning
+### Training
 The below script has the hyperparameters and settings to reproduce FiBN CLEVR results:
 ```bash
 sh scripts/train/fibn.sh
 ```
-For CLEVR-Humans, data preprocessing instructions are [here](https://github.com/facebookresearch/clevr-iep/blob/master/TRAINING.md#preprocessing-clevr-humans).
-The below script has the hyperparameters and settings to reproduce FiBN CLEVR-Humans results:
-```bash
-sh scripts/train/fibn_humans.sh
-```
-Training a FiBN CLEVR model should take ~20 hours on an avarage GPU
+Training a FiBN CLEVR model should take ~20 hours on an average GPU
 
 ### Running models
 
@@ -43,9 +44,6 @@ python run_model.py --program_generator <FiLM Generator filepath> --execution_en
 When FiLM Generator filepath and FiLMed Network filepath are the same.
 
 By default, the command runs on [this CLEVR image](https://github.com/gilzim/film/blob/CBN_layers/img/CLEVR_val_000017.png), but you may modify which image to use via command line flag to test on any CLEVR image.
-
-CLEVR vocab is enforced by default, but for CLEVR-Humans models, for example, you may append the command line flag option 
-'--enforce_clevr_vocab 0' to ask any string of characters you please.
 
 We added the script run_model_fibn.sh which runs on a batch of 3000 samples. It returns the accuracy of the model
 and saves different gammas & bettas distributions in img/stats
