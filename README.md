@@ -14,14 +14,12 @@ and  the train folder which contains .sh scripts for training FiLM and FiBN mode
 
 the img folder includes example pictures of the CLEVR dataset and the stats folder which contains gammas and betas distributions of the FiBN model.
 
+### Important Notes
+- The can only run on the Linux OS
+- All bash scripts and commands must be executed from the src folder
+
 ### Setup
-The program must run on the linux os.
-
-Because we essentialy use the FiLM model, the setup instructions for the FiBN model are the same as FiLM.
-from FiLM's README.md:
-
-First, follow the virtual environment setup [instructions](https://github.com/facebookresearch/clevr-iep#setup).
-create an empty conda enviorment and run the following command: 
+First, create an empty conda enviorment and run the following command: 
 ```bash
 pip install -r requirements.txt
 ```
