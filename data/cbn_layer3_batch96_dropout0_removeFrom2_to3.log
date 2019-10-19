@@ -1,0 +1,122 @@
+Will save checkpoints to data/cbn_layer3_batch96_dropout0_removeFrom2_to3.pt
+Reading features from data/train_features.h5
+Reading questions from  data/train_questions.h5
+Reading question data into memory
+Reading features from data/val_features.h5
+Reading questions from  data/val_questions.h5
+Reading question data into memory
+device count = 2
+Here is the conditioning network:
+DataParallel (
+  (module): FiLMGen (
+    (encoder_embed): Embedding(93, 200)
+    (encoder_rnn): GRU(200, 4096, batch_first=True)
+    (decoder_linear): Linear (4096 -> 1536)
+  )
+)
+Here is the conditioned network:
+FiLMedNet (
+  (stem): Sequential (
+    (0): Conv2d(1026, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True)
+    (2): ReLU (inplace)
+  )
+  (0): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (cbn): CBN (
+    )
+    (film): FiLM (
+    )
+  )
+  (1): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (cbn): CBN (
+    )
+    (film): FiLM (
+    )
+  )
+  (2): FiLMedResBlock (
+    (input_proj): Conv2d(130, 128, kernel_size=(1, 1), stride=(1, 1))
+    (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (cbn): CBN (
+    )
+    (film): FiLM (
+    )
+  )
+  (classifier): Sequential (
+    (0): Conv2d(130, 512, kernel_size=(1, 1), stride=(1, 1))
+    (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True)
+    (2): ReLU (inplace)
+    (3): MaxPool2d (size=(14, 14), stride=(14, 14), dilation=(1, 1))
+    (4): Flatten (
+    )
+    (5): Linear (512 -> 1024)
+    (6): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True)
+    (7): ReLU (inplace)
+    (8): Linear (1024 -> 32)
+  )
+)
+train_loader has 350000 samples
+val_loader has 75000 samples
+Starting epoch 1
+Starting epoch 2
+Starting epoch 3
+10000 0.9621006884038449
+Starting epoch 4
+Starting epoch 5
+Starting epoch 6
+20000 0.806814359408617
+Starting epoch 7
+Starting epoch 8
+Starting epoch 9
+30000 0.5274436630427838
+Starting epoch 10
+Starting epoch 11
+40000 0.37434671443104744
+Starting epoch 12
+Starting epoch 13
+Starting epoch 14
+50000 0.2818731159128249
+Starting epoch 15
+Starting epoch 16
+Starting epoch 17
+60000 0.22428848324641584
+Starting epoch 18
+Starting epoch 19
+Checking training accuracy ... 
+train accuracy is 0.9368206521739131
+Checking validation accuracy ...
+val accuracy is  0.8396666666666667
+Saving checkpoint to data/cbn_layer3_batch96_dropout0_removeFrom2_to3.pt
+Starting epoch 20
+70000 0.17717120773121714
+Starting epoch 21
+Starting epoch 22
+80000 0.140847374252975
+Starting epoch 23
+Starting epoch 24
+Starting epoch 25
+90000 0.1136242665503174
+Starting epoch 26
+Starting epoch 27
+Starting epoch 28
+100000 0.09723120103012771
+Starting epoch 29
+Starting epoch 30
+Starting epoch 31
+110000 0.08593779964842833
+Starting epoch 32
+Starting epoch 33
+120000 0.07858111277073622
+Starting epoch 34
+Starting epoch 35
+Starting epoch 36
+130000 0.06997394465398975
+Starting epoch 37
+Checking training accuracy ... 
+train accuracy is 0.9791933077578857
+Checking validation accuracy ...
+val accuracy is  0.8455866666666667
+Saving checkpoint to data/cbn_layer3_batch96_dropout0_removeFrom2_to3.pt
