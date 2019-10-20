@@ -441,7 +441,7 @@ def update_hist(question_types, pred, answers, hist_correct, hist_total):
     actual = pred == answers
     for i, q_type in enumerate(question_types):
         category = question_category(q_type)
-        if actual[i]:
+        if actual[i].all():
             hist_correct[category] += 1
         hist_total[category] += 1
 
