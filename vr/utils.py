@@ -52,11 +52,11 @@ def load_program_generator(path, model_type='PG+EE'):
         print('Loading FiLMGen from ' + path)
         kwargs = get_updated_args(kwargs, FiLMGen)
         model = FiLMGen(**kwargs)
-        # new_state_dict = OrderedDict()
-        # for k, v in state.items():
-        #     name = k[7:]  # remove `module.`
-        #     new_state_dict[name] = v
-        # state = new_state_dict
+        new_state_dict = OrderedDict()
+        for k, v in state.items():
+            name = k[7:]  # remove `module.`
+            new_state_dict[name] = v
+        state = new_state_dict
     else:
         print('Loading PG from ' + path)
         model = Seq2Seq(**kwargs)
