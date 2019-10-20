@@ -425,9 +425,9 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
 
 
 def question_category(q_type):
-    category = 0
-
-    if q_type == 1 or q_type == 2:
+    if q_type == 0:
+        category = 0
+    elif q_type == 1 or q_type == 2:
         category = 1
     elif q_type == 3:
         category = 2
