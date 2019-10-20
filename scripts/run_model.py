@@ -386,11 +386,9 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
 
     # Save FiLM params
     print("=== film_params save ===")
-    print(np.vstack(film_params))
     np.save('film_params', np.vstack(film_params))
     if isinstance(questions, list):
         print("=== q_types save ===")
-        print(np.vstack(q_types))
         np.save('q_types', np.vstack(q_types))
 
     # Save FiLM param stats
