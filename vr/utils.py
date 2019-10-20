@@ -73,6 +73,11 @@ def load_execution_engine(path, verbose=True, model_type='PG+EE'):
         print('Loading FiLMedNet from ' + path)
         kwargs = get_updated_args(kwargs, FiLMedNet)
         model = FiLMedNet(**kwargs)
+        new_state_dict = OrderedDict()
+        for k, v in state.items():
+            name = k[7:]  # remove `module.`
+            new_state_dict[name] = v
+        state = new_state_dict
     else:
         print('Loading EE from ' + path)
         model = ModuleNet(**kwargs)
