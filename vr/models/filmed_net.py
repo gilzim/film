@@ -270,10 +270,8 @@ class FiLMedResBlock(nn.Module):
         if self.condition_method == 'conv-film' and self.with_cond[0]:
             self.film = FiLM()
         if self.with_batchnorm:
-            if self.with_cbn > 0:
-                self.cbn = CBN()
-            else:
-                self.bn1 = nn.BatchNorm2d(out_dim, affine=((not self.with_cond[0]) or self.batchnorm_affine))
+            self.cbn = CBN()
+            self.bn1 = nn.BatchNorm2d(out_dim, affine=((not self.with_cond[0]) or self.batchnorm_affine))
         if self.condition_method == 'bn-film' and self.with_cond[0]:
             self.film = FiLM()
         if dropout > 0:
