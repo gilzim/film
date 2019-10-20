@@ -39,9 +39,9 @@ Training a FiBN CLEVR model should take ~20 hours on an average GPU
 
 There is an interactive command line tool for use with the below command/script.
 ```bash
-python run_model.py --program_generator <FiLM Generator filepath> --execution_engine <FiLMed Network filepath>
+python run_model.py --program_generator <model checkpoint> --execution_engine <model checkpoint>
 ```
-When FiLM Generator filepath and FiLMed Network filepath are the same.
+When both checkpoints are the same.
 
 By default, the command runs on [this CLEVR image](https://github.com/gilzim/film/blob/CBN_layers/img/CLEVR_val_000017.png), but you may modify which image to use via command line flag to test on any CLEVR image.
 
