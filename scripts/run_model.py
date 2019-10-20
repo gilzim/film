@@ -419,6 +419,7 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
 
     if args.debug_every <= 1:
         pdb.set_trace()
+    print("Done")
     return
 
 
