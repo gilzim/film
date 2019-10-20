@@ -19,7 +19,7 @@ the img folder includes example pictures of the CLEVR dataset and the stats fold
 - All bash scripts and commands must be executed from the src folder
 
 ### Setup
-First, create an empty conda enviorment and run the following command: 
+First, create a conda enviorment using the provided environment.yml file and run the following command: 
 ```bash
 pip install -r requirements.txt
 ```
