@@ -165,13 +165,14 @@ class FiLMedNet(nn.Module):
         else:
             # film.size() = (64,4,256)
             # gammas.size() == betas.size() == (64,4,128)
-            film_gammas, cbn_gammas, film_betas, cbn_betas = torch.split(film[:, :, :4 * self.module_dim], self.module_dim, dim=-1)
+            film_gammas, film_betas = torch.split(film[:, :, :2 * self.module_dim], self.module_dim, dim=-1)
+            # film_gammas, cbn_gammas, film_betas, cbn_betas = torch.split(film[:, :, :4 * self.module_dim], self.module_dim, dim=-1)
             if not self.use_gamma:
                 film_gammas = self.default_weight.expand_as(film_gammas)
-                cbn_gammas = self.default_weight.expand_as(cbn_gammas)
+                # cbn_gammas = self.default_weight.expand_as(cbn_gammas)
             if not self.use_beta:
                 film_betas = self.default_bias.expand_as(film_betas)
-                cbn_betas = self.default_bias.expand_as(cbn_betas)
+                # cbn_betas = self.default_bias.expand_as(cbn_betas)
 
         # Propagate up image features CNN
         batch_coords = None
@@ -196,7 +197,7 @@ class FiLMedNet(nn.Module):
             else:
                 layer_output = self.function_modules[fn_num](module_inputs[:, fn_num],
                                                              film_gammas[:, fn_num, :], film_betas[:, fn_num, :],
-                                                             cbn_gammas[:, fn_num, :], cbn_betas[:, fn_num, :],
+                                                             # cbn_gammas[:, fn_num, :], cbn_betas[:, fn_num, :],
                                                              batch_coords)
 
             # Store for future computation
@@ -278,7 +279,9 @@ class FiLMedResBlock(nn.Module):
 
         init_modules(self.modules())
 
-    def forward(self, x, film_gammas=None, film_betas=None, cbn_gammas=None, cbn_betas=None, extra_channels=None, cond_maps=None):
+    def forward(self, x, film_gammas=None, film_betas=None,
+                # cbn_gammas=None, cbn_betas=None,
+                extra_channels=None, cond_maps=None):
         if self.debug_every <= -2:
             pdb.set_trace()
 
@@ -302,7 +305,7 @@ class FiLMedResBlock(nn.Module):
             out = self.film(out, film_gammas, film_betas)
         if self.with_batchnorm:
             if self.with_cbn:
-                out = self.cbn(out, cbn_gammas, cbn_betas)
+                out = self.cbn(out, None, None)  # cbn_gammas, cbn_betas)
             else:
                 out = self.bn1(out)
         if self.condition_method == 'bn-film' and self.with_cond[0]:

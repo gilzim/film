@@ -9,7 +9,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import seaborn as sn
 
 if __name__ == '__main__':
-    layer_index_to_plot = 3
+    layer_index_to_plot = 0
     print("=== film_params load ===")
     film_params = np.load('../film_params.npy')
     film_params = film_params[:, layer_index_to_plot, :]
