@@ -24,7 +24,9 @@ First, create a conda enviorment using the provided environment.yml file and run
 pip install -r requirements.txt
 ```
 
-Second, follow the CLEVR data preprocessing [instructions](https://github.com/facebookresearch/clevr-iep/blob/master/TRAINING.md#preprocessing-clevr).
+Second, run the download_dataset.sh script located in scripts folder to download the CLEVR dataset.
+
+Third, run the preprocess_data.sh script located in scripts folder to preprocess the data.
 
 ### Training
 The below script has the hyperparameters and settings to reproduce FiBN CLEVR results:
