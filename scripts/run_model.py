@@ -365,6 +365,8 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
     end = time.time()
     print("Time Elapsed = ", end-start)
 
+    print(correct_hist)
+    print(total_hist)
     acc_hist = [correct_hist[i] / total_hist[i] for i in range(len(correct_hist))]
     print("acc_hist", acc_hist)
 
@@ -384,11 +386,9 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
 
     # Save FiLM params
     print("=== film_params save ===")
-    print(np.vstack(film_params))
     np.save('film_params', np.vstack(film_params))
     if isinstance(questions, list):
         print("=== q_types save ===")
-        print(np.vstack(q_types))
         np.save('q_types', np.vstack(q_types))
 
     # Save FiLM param stats
@@ -419,13 +419,14 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
 
     if args.debug_every <= 1:
         pdb.set_trace()
+    print("Done")
     return
 
 
 def question_category(q_type):
-    category = 0
-
-    if q_type == 1 or q_type == 2:
+    if q_type == 0:
+        category = 0
+    elif q_type == 1 or q_type == 2:
         category = 1
     elif q_type == 3:
         category = 2
@@ -441,7 +442,7 @@ def update_hist(question_types, pred, answers, hist_correct, hist_total):
     actual = pred == answers
     for i, q_type in enumerate(question_types):
         category = question_category(q_type)
-        if actual[i]:
+        if actual[i].all():
             hist_correct[category] += 1
         hist_total[category] += 1
 

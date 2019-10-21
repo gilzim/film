@@ -282,7 +282,9 @@ class FiLMedResBlock(nn.Module):
 
         init_modules(self.modules())
 
-    def forward(self, x, film_gammas=None, film_betas=None, cbn_gammas=None, cbn_betas=None, extra_channels=None, cond_maps=None):
+    def forward(self, x, film_gammas=None, film_betas=None,
+                cbn_gammas=None, cbn_betas=None,
+                extra_channels=None, cond_maps=None):
         if self.debug_every <= -2:
             pdb.set_trace()
 
