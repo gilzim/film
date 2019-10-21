@@ -365,8 +365,6 @@ def run_our_model_batch(args, pg, ee, loader, dtype):
     end = time.time()
     print("Time Elapsed = ", end-start)
 
-    print(correct_hist)
-    print(total_hist)
     acc_hist = [correct_hist[i] / total_hist[i] for i in range(len(correct_hist))]
     print("acc_hist", acc_hist)
 
